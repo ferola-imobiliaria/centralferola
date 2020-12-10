@@ -29,7 +29,7 @@
                                 @foreach($team->users as $member)
                                     <li class="col-sm-4">
                                         <img
-                                            src="{{ asset('storage/' . (Auth::user()->photo ?? '../images/no_photo.png')) }}"
+                                            src="{{ asset('storage/' . ($member->photo ?? '../images/no_photo.png')) }}"
                                             alt="{{ $member->name_short }}">
                                         <a class="users-list-name" href="#">{{ $member->name_short }}</a>
                                         <span class="users-list-date">{{ $member->name }}</span>
