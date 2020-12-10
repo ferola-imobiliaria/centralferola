@@ -1,0 +1,14 @@
+*.log
+/node_modules
+/public/storage
+/storage/*.key
+/vendor
+.env
+npm-debug.log
+yarn-error.log
+
+
+#Docker files
+.docker/
+Dockerfile
+docker-compose.yaml

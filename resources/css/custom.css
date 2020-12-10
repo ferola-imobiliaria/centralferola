@@ -1,0 +1,144 @@
+.img-member-team {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+}
+
+h1 > small {
+    font-size: 15px;
+    display: inline-block;
+    padding-left: 4px;
+    font-weight: 300;
+}
+
+.msg-error {
+    margin: 0;
+}
+
+/* PRODUCTION */
+.production table {
+    text-align: center;
+}
+
+.production table thead tr th {
+    width: 10%;
+}
+
+.production table tr td input {
+    width: 75px;
+    text-align: center;
+}
+
+.production table tr td input.money {
+    width: 96px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.production table input::-webkit-outer-spin-button,
+.production table input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.production table input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* END - PRODUCTION */
+
+
+/* BUTTON FLOATING */
+.btn-floating {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+/* END - BUTTON FLOATING */
+
+
+/* HOME */
+.user-panel img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.info-box-content {
+    text-align: center;
+}
+
+.brand-link {
+    padding: 0.5rem;
+}
+
+.brand-link .brand-image {
+    float: none;
+    max-height: 43px;
+}
+
+/* end - HOME */
+
+/* Equipes */
+.card-title {
+    font-weight: 600;
+}
+
+.users-list > li {
+    width: auto;
+}
+
+.users-list > li img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+}
+
+.users-list-name {
+    white-space: normal;
+}
+
+/* end - Equipes */
+
+/* INFORMATIVOS */
+.informative-tools a,
+.informative-footer a.btn {
+    text-decoration: none;
+}
+
+.informative-footer a:hover {
+    color: initial;
+}
+
+.ck-editor__editable_inline {
+    min-height: 150px;
+}
+
+/* FIM - INFORMATIVOS */
+
+/* TABELA DE PONTOS */
+.pointsTable input {
+    text-align: center;
+    width: 100px;
+}
+
+.select2-container--bootstrap .select2-results__group {
+    color: red !important;
+}
+
+.select2-container--bootstrap .select2-results__option .select2-results__option {
+    padding: 5px 0 5px 20px !important;
+}
+
+.info-box .progress {
+    height: 15px;
+}
+
+
+/* FIM - TABELA DE PONTOS */
