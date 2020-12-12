@@ -229,7 +229,7 @@
                                             <div class="col-sm-7">
                                                 <label for="exclusive">Exclusivo</label>
                                                 <select class="form-control select2" name="exclusive" id="exclusive">
-                                                    <option></option>
+                                                    <option value=""></option>
                                                     @foreach($realtors as $realtor)
                                                         <option value="{{ $realtor->id }}">
                                                             {{ $realtor->name }} ({{ $realtor->name_short }})
