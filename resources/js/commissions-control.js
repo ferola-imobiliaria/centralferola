@@ -108,6 +108,11 @@ $('input#realtor_percentage').on('focusout change', function () {
  * Se o checkbox do exclusivo for maracado, a comissão da imobiliária será somada com o valor monetário do exclusivo
  */
 $('input:checkbox[id="isExclusive"]').on('change', function () {
+
+    if ($("input#isExclusive:checked").val() != 'on') {
+        $("#exclusive").val("").change();
+    }
+
     let commissionValue = $('input#commission_value').cleanVal();
     let commissionExclusive = calcCommission(commissionValue, 5);
 
