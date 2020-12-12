@@ -73,6 +73,30 @@ class ProductionRepository implements ProductionRepositoryInterface
         return $data;
     }
 
+    public function getIndividualYearProduction(User $user, int $year = null)
+    {
+        $year = $year ?? date('Y');
+
+        $data = collect([]);
+
+        for ($i = 1; $i <= count(months('number')); $i++) {
+            $data->put($i,
+                $user->productions()
+                    ->selectRaw("
+                        SUM(captured_properties) as captured_properties,
+                        SUM(captured_exclusivities) as captured_exclusivities,
+                        SUM(published_ads) as published_ads,
+                        SUM(plaques) as plaques,
+                        SUM(proposals) as proposals"
+                    )
+                    ->whereMonth('date', $i)
+                    ->WhereYear('date', $year)
+                    ->first()
+            );
+        }
+
+        return $data;
+    }
 
     /**
      * Função que retorna o ranking de corretores por item de produção anual

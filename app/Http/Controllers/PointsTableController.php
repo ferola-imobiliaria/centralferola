@@ -6,6 +6,7 @@ use App\PointsTable;
 use App\PointsTableInfo;
 use App\Production;
 use App\Repositories\CommissionRepository;
+use App\Repositories\ProductionRepository;
 use App\Team;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class PointsTableController extends Controller
     private $year;
     private $productions;
     private $commissionRepository;
+    private $productionRepository;
 
     /**
      * @return mixed
@@ -86,9 +88,10 @@ class PointsTableController extends Controller
         $this->user = $user;
     }
 
-    public function __construct(CommissionRepository $commissionRepository)
+    public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository)
     {
         $this->commissionRepository = $commissionRepository;
+        $this->productionRepository = $productionRepository;
     }
 
     public function index()
@@ -142,7 +145,7 @@ class PointsTableController extends Controller
         }
 
         return view('points-table.index', [
-            'productions' => $this->getProductions(),
+            'productions' => $this->productionRepository->getIndividualYearProduction($this->getUser())->only($monthsOfQuarter),
             'qtdSalesRealtor' => $qtdSalesRealtor,
             'quarter' => $this->getQuarter(),
             'year' => $this->getYear(),

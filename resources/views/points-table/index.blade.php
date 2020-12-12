@@ -57,17 +57,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @for ($i = 0; $i < 3; $i++)
+                        @foreach($productions as $month => $production)
                             <tr>
-                                <th scope="row">{{ \Carbon\Carbon::createFromFormat('m', $monthsOfQuarter[$i])->monthName }}</th>
-                                <td>{{ $productions[$i]->captured_properties ?? 0 }}</td>
-                                <td>{{ $productions[$i]->captured_exclusivities ?? 0 }}</td>
-                                <td>{{ $productions[$i]->published_ads ?? 0 }}</td>
-                                <td>{{ $productions[$i]->plaques ?? 0 }}</td>
-                                <td>{{ $qtdSalesRealtor[$i] }}</td>
+                                <th scope="row">{{ \Carbon\Carbon::createFromFormat('m', $month)->monthName }}</th>
+                                <td>{{ $production->captured_properties ?? 0 }}</td>
+                                <td>{{ $production->captured_exclusivities ?? 0 }}</td>
+                                <td>{{ $production->published_ads ?? 0 }}</td>
+                                <td>{{ $production->plaques ?? 0 }}</td>
+                                <td>{{ $qtdSalesRealtor[$loop->index] }}</td>
                                 <td class="table-secondary text-bold totalMonth">0</td>
                             </tr>
-                        @endfor
+                        @endforeach
                         </tbody>
                         <tfoot>
                         <tr class="bg-gray-light">
