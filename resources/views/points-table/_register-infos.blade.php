@@ -4,6 +4,7 @@
     <input type="hidden" name="quarter" value="{{ $quarter }}">
     <input type="hidden" name="year" value="{{ $year }}">
 
+    <!-- ENDEREÇO DAS PLACAS PENDURADAS -->
     <div class="col-md-4 col-sm-12">
         <div class="card">
             <div class="card-header bg-danger">
@@ -17,19 +18,24 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                @for($i = 0; $i < $qtdFields['plaques']->value; $i++)
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="plaque_address[{{$i}}][value]"
-                               value="{{ $infos['plaque_address'][$i]->value ?? '' }}">
-                        <input type="hidden" name="plaque_address[{{$i}}][id]"
-                               value="{{ $infos['plaque_address'][$i]->id ?? '' }}">
-                    </div>
-                @endfor
+                @if($qtdFields['plaques']->value)
+                    @for($i = 0; $i < $qtdFields['plaques']->value; $i++)
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="plaque_address[{{$i}}][value]"
+                                   value="{{ $infos['plaque_address'][$i]->value ?? '' }}">
+                            <input type="hidden" name="plaque_address[{{$i}}][id]"
+                                   value="{{ $infos['plaque_address'][$i]->id ?? '' }}">
+                        </div>
+                    @endfor
+                @else
+                    <b>Nenhuma placa pendurada cadastrada no período </b>
+                @endif
             </div>
             <!-- /.card-body -->
         </div>
     </div>
 
+    <!-- CÓDIGOS DOS ANÚNCIOS PUBLICADOS -->
     <div class="col-md-4 col-sm-12">
         <div class="card">
             <div class="card-header bg-danger">
@@ -43,22 +49,27 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                @for($i = 0; $i < $qtdFields['published_ads']->value; $i++)
-                    <div class="form-group">
-                        <input type="text" class="form-control"
-                               name="published_ads[{{$i}}][value]"
-                               value="{{ $infos['published_ads'][$i]->value ?? '' }}"
-                        >
-                        <input type="hidden" name="published_ads[{{$i}}][id]"
-                               value="{{ $infos['published_ads'][$i]->id ?? '' }}">
+                @if($qtdFields['published_ads']->value)
+                    @for($i = 0; $i < $qtdFields['published_ads']->value; $i++)
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   name="published_ads[{{$i}}][value]"
+                                   value="{{ $infos['published_ads'][$i]->value ?? '' }}"
+                            >
+                            <input type="hidden" name="published_ads[{{$i}}][id]"
+                                   value="{{ $infos['published_ads'][$i]->id ?? '' }}">
 
-                    </div>
-                @endfor
+                        </div>
+                    @endfor
+                @else
+                    <b>Nenhum anúncio publicado cadastrado no período </b>
+                @endif
             </div>
             <!-- /.card-body -->
         </div>
     </div>
 
+    <!-- ENDEREÇO DAS EXCLUSIVIDADES -->
     <div class="col-md-4 col-sm-12">
         <div class="card">
             <div class="card-header bg-danger">
@@ -72,15 +83,19 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                @for($i = 0; $i < $qtdFields['exclusivities']->value; $i++)
-                    <div class="form-group">
-                        <input type="text" class="form-control"
-                               name="exclusivity_address[{{$i}}][value]"
-                               value="{{ $infos['exclusivity_address'][$i]->value ?? '' }}">
-                        <input type="hidden" name="exclusivity_address[{{$i}}][id]"
-                               value="{{ $infos['exclusivity_address'][$i]->id ?? '' }}">
-                    </div>
-                @endfor
+                @if($qtdFields['exclusivities']->value)
+                    @for($i = 0; $i < $qtdFields['exclusivities']->value; $i++)
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   name="exclusivity_address[{{$i}}][value]"
+                                   value="{{ $infos['exclusivity_address'][$i]->value ?? '' }}">
+                            <input type="hidden" name="exclusivity_address[{{$i}}][id]"
+                                   value="{{ $infos['exclusivity_address'][$i]->id ?? '' }}">
+                        </div>
+                    @endfor
+                @else
+                    <b>Nenhuma exclusividade cadastrada no período </b>
+                @endif
             </div>
             <!-- /.card-body -->
         </div>
