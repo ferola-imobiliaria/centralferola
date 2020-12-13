@@ -52,17 +52,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-sm">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-share"></i>
-                        </button>
-                    </div>
+                        <div class="col-sm">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Prodction Result -->
+    <!-- Production Result -->
     @isset($userProduction)
         <div class="card card-danger card-outline">
             <div class="card-body">
@@ -85,6 +85,7 @@
         </div>
     @endisset
 
+    <!-- Production Detail -->
     @isset($dayUserProduction)
         <div class="card card-danger collapsed-card">
             <div class="card-header">
@@ -108,11 +109,7 @@
                                     <th scope="col">EXCLUSIVIDADES CAPTADAS</th>
                                     <th scope="col">ANÚNCIOS PUBLICADOS</th>
                                     <th scope="col">PLACAS</th>
-                                    <th scope="col">CAPTAÇÕES VENDIDAS</th>
-                                    <th scope="col">VENDAS</th>
-                                    <th scope="col">VGV</th>
                                     <th scope="col">PROPOSTAS</th>
-                                    <th scope="col">EXCLUSIVIDADES VENDIDAS</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -123,11 +120,7 @@
                                         <td>{{ $production->captured_exclusivities }}</td>
                                         <td>{{ $production->published_ads }}</td>
                                         <td>{{ $production->plaques }}</td>
-                                        <td>{{ $production->captures_sold }}</td>
-                                        <td>{{ $production->sales }}</td>
-                                        <td>{{ $production->vgv }}</td>
                                         <td>{{ $production->proposals }}</td>
-                                        <td>{{ $production->exclusivities_sold }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
