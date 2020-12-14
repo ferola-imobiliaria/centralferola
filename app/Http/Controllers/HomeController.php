@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CommissionsControl;
 use App\Production;
 use App\Repositories\CommissionRepository;
+use App\Repositories\PointsTableRepository;
 use App\Repositories\ProductionRepository;
 use App\Repositories\TeamRepository;
 use App\Repositories\UserRepository;
@@ -18,6 +19,7 @@ class HomeController extends Controller
     private $teamRepository;
     private $userRepository;
     private $commissionRepository;
+    private $pointsTableRepository;
 
     /**
      * Create a new controller instance.
@@ -25,7 +27,7 @@ class HomeController extends Controller
      * @param ProductionRepository $productionRepository
      * @param TeamRepository $teamRepository
      */
-    public function __construct(ProductionRepository $productionRepository, TeamRepository $teamRepository, UserRepository $userRepository, CommissionRepository $commissionRepository)
+    public function __construct(ProductionRepository $productionRepository, TeamRepository $teamRepository, UserRepository $userRepository, CommissionRepository $commissionRepository, PointsTableRepository $pointsTableRepository)
     {
         $this->middleware('auth');
 
@@ -33,6 +35,7 @@ class HomeController extends Controller
         $this->teamRepository = $teamRepository;
         $this->userRepository = $userRepository;
         $this->commissionRepository = $commissionRepository;
+        $this->pointsTableRepository = $pointsTableRepository;
     }
 
     /**
@@ -79,6 +82,8 @@ class HomeController extends Controller
         }
 
         return view('home', [
+            'quarterTotalScore' => $this->pointsTableRepository->getQuarterTotalScore($user, currentQuarter()),
+            'quarterTarget' => $this->pointsTableRepository->getQuarterTarget(currentQuarter()),
             'userMonthProduction' => $userMonthProduction,
             'userYearProduction' => $userYearProduction,
             'team_members' => $team_members ?? null,
@@ -114,6 +119,8 @@ class HomeController extends Controller
         }
 
         return view('home', [
+            'quarterTotalScore' => $this->pointsTableRepository->getQuarterTotalScore($user, currentQuarter()),
+            'quarterTarget' => $this->pointsTableRepository->getQuarterTarget(currentQuarter()),
             'team_members' => $team_members ?? null,
             'monthErnings' => $monthErnings,
             'yearErnings' => $yearErnings,

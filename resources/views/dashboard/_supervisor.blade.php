@@ -1,9 +1,11 @@
 <div class="container-fluid dashboard">
+    <!-- PONTUAÇÃO -->
+@include('dashboard.components.my_score')
 
-    <!-- MEUS GANHOS -->
-    @include('dashboard.components.my_ernings')
+<!-- MEUS GANHOS -->
+@include('dashboard.components.my_ernings')
 
-    <!-- PRODUÇÂO -->
+<!-- PRODUÇÂO -->
     <div class="row">
         <!-- PRODUÇÃO DO MÊS -->
         <div class="col-md-6">
