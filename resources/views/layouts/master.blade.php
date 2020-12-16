@@ -2,6 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
+
+    <!-- Não indexar nos motores de busca -->
+    <meta name="robots" content="noindex">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ config('app.name') }} | @yield('page_title')</title>
 
