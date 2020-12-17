@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Date;
 use App\Production;
+use App\Repositories\ProductionRepository;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use TJGazel\Toastr\Facades\Toastr;
 
 class ProductionController extends Controller
 {
 
-    public function __construct()
+    private $productionRepository;
+
+    public function __construct(ProductionRepository $productionRepository)
     {
         $this->middleware('auth');
+        $this->productionRepository = $productionRepository;
     }
 
     /**
@@ -26,19 +31,8 @@ class ProductionController extends Controller
         $month = $month ?? now()->month;
         $year = $year ?? now()->year;
 
-        $userProduction = Production::whereMonth('date', $month)
-            ->whereYear('date', $year)
-            ->where('user_id', Auth::id())
-            ->get();
-
-        $monthProductions = [
-            'dates' => $monthCalendar = Date::monthCalendar($month, $year),
-            'productions' => $userProduction
-        ];
-
-
         return view('productions.index', [
-            'monthProductions' => $monthProductions,
+            'monthProductions' => $this->productionRepository->getProductionMonth(Auth::user(), $month, $year),
             'monthSelected' => $month,
             'yearSelected' => $year
         ]);
@@ -48,20 +42,26 @@ class ProductionController extends Controller
     {
         $producoesRequest = $request->input("prod.*");
 
-        foreach ($producoesRequest as $producao) {
-            Production::updateOrCreate(
-                [
-                    'date' => $producao['date'],
-                    'user_id' => Auth::id()
-                ],
-                [
-                    'captured_properties' => $producao['imv_cap'],
-                    'captured_exclusivities' => $producao['exc_cap'],
-                    'published_ads' => $producao['anuncios_publicados'],
-                    'plaques' => $producao['placas'],
-                    'proposals' => $producao['propostas'],
-                ]
-            );
+        foreach ($producoesRequest as $key => $producao) {
+
+            // Checa se a linha do array possui informações de produção
+            $hasProduction = array_sum(Arr::except($producoesRequest[$key], 'date'));
+
+            if ($hasProduction) {
+                Production::updateOrCreate(
+                    [
+                        'date' => $producao['date'],
+                        'user_id' => Auth::id()
+                    ],
+                    [
+                        'captured_properties' => $producao['imv_cap'],
+                        'captured_exclusivities' => $producao['exc_cap'],
+                        'published_ads' => $producao['anuncios_publicados'],
+                        'plaques' => $producao['placas'],
+                        'proposals' => $producao['propostas'],
+                    ]
+                );
+            }
         }
 
         Toastr::success('<b>Sua produção foi salva com sucesso!!!</b>');

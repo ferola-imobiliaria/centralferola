@@ -59,28 +59,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($monthProductions['dates'] as $index => $date)
+                        @foreach($monthProductions as $date => $production)
                             <tr>
                                 <th scope="row">{{ date('d/m/Y', strtotime($date)) }}</th>
                                 <td>
                                     <input type="number" min="0" name="prod[{{$date}}][imv_cap]"
-                                           value="{{ $monthProductions['productions'][$index]->captured_properties ?? '0' }}">
+                                           value="{{ $production->captured_properties ?? '0' }}">
                                 </td>
                                 <td>
                                     <input type="number" min="0" name="prod[{{$date}}][exc_cap]"
-                                           value="{{ $monthProductions['productions'][$index]->captured_exclusivities ?? '0' }}">
+                                           value="{{ $production->captured_exclusivities ?? '0' }}">
                                 </td>
                                 <td>
                                     <input type="number" min="0" name="prod[{{$date}}][anuncios_publicados]"
-                                           value="{{ $monthProductions['productions'][$index]->published_ads ?? '0' }}">
+                                           value="{{ $production->published_ads ?? '0' }}">
                                 </td>
                                 <td>
                                     <input type="number" min="0" name="prod[{{$date}}][placas]"
-                                           value="{{ $monthProductions['productions'][$index]->plaques ?? '0' }}">
+                                           value="{{ $production->plaques ?? '0' }}">
                                 </td>
                                 <td>
                                     <input type="number" min="0" name="prod[{{$date}}][propostas]"
-                                           value="{{ $monthProductions['productions'][$index]->proposals ?? '0' }}">
+                                           value="{{ $production->proposals ?? '0' }}">
                                 </td>
 
                                 <input type="hidden" name="prod[{{$date}}][date]" value="{{$date}}">

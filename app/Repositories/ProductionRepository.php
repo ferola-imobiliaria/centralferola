@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\CommissionsControl;
+use App\Helpers\Date;
 use App\Production;
 use App\Team;
 use App\User;
@@ -121,4 +122,39 @@ class ProductionRepository implements ProductionRepositoryInterface
         return $data;
     }
 
+
+    public function getProductionMonth(User $user, int $month, int $year = null)
+    {
+        $year = $year ?? date('Y');
+
+        $monthCalendar = Date::monthCalendar($month, $year);
+
+        $userProductions = $user->productions()
+            ->whereMonth('date', $month)
+            ->whereYear('date', $year)
+            ->orderBy('date')
+            ->get();
+
+        $data = collect([]);
+
+        if (!$userProductions->isEmpty()) {
+            foreach ($monthCalendar as $day) {
+                foreach ($userProductions as $prod) {
+                    if ($prod->date == $day) {
+                        $dayProd = $prod;
+                        break;
+                    } else {
+                        $dayProd = null;
+                    }
+                }
+                $data->put($day, $dayProd);
+            }
+        } else {
+            foreach ($monthCalendar as $day) {
+                $data->put($day, 0);
+            }
+        }
+
+        return $data;
+    }
 }

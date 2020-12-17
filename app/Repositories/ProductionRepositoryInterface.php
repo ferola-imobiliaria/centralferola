@@ -15,4 +15,6 @@ interface ProductionRepositoryInterface
     public function getIndividualYearProduction(User $user, int $year = null);
 
     public function getRankingProduction(string $field, string $store, int $year = null);
+
+    public function getProductionMonth(User $user, int $month, int $year = null);
 }
