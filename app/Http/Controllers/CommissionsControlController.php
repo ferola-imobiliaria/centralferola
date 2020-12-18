@@ -38,8 +38,7 @@ class CommissionsControlController extends Controller
 
         $user_team = $user->team;
 
-        $realtors = User::where('profile', '!=', 'admin')
-            ->orderBy('name', 'asc')
+        $realtors = User::orderBy('name', 'asc')
             ->get(['id', 'name', 'name_short']);
 
         $supervisor = $user_team->users()->where('profile', 'supervisor')->first();
