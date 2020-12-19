@@ -50,7 +50,7 @@
         <p style="margin-top: 50px;">Brasília, {{ $commissionControl->sale_date }}.</p>
         <p style="margin-top: 100px;text-align: center;">_______________________________________
             <br/>{{ strtoupper(getUserName($commissionControl->supervisor)) }}
-            <br/>CPF: {{ $commissionControl->user->cpf }}</p>
+            <br/>CPF: {{ getUserCpf($commissionControl->supervisor) }}</p>
     </div>
 @endif
 
@@ -69,7 +69,7 @@
         <p style="margin-top: 50px;">Brasília, {{ $commissionControl->sale_date }}.</p>
         <p style="margin-top: 100px;text-align: center;">_______________________________________
             <br/>{{ strtoupper(getUserName($commissionControl->exclusive)) }}
-            <br/>CPF: {{ $commissionControl->user->cpf }}</p>
+            <br/>CPF: {{ getUserCpf($commissionControl->exclusive) }}</p>
     </div>
 @endif
 
@@ -88,7 +88,7 @@
         <p style="margin-top: 50px;">Brasília, {{ $commissionControl->sale_date }}.</p>
         <p style="margin-top: 100px;text-align: center;">_______________________________________
             <br/>{{ strtoupper(getUserName($commissionControl->catcher)) }}
-            <br/>CPF: {{ $commissionControl->user->cpf }}</p>
+            <br/>CPF: {{ getUserCpf($commissionControl->catcher) }}</p>
     </div>
 @endif
 

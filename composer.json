@@ -51,6 +51,7 @@
             "app/Helpers/currentQuarter.php",
             "app/Helpers/months.php",
             "app/Helpers/getUserName.php",
+            "app/Helpers/getUserCpf.php",
             "app/Helpers/storeColors.php"
         ]
     },
