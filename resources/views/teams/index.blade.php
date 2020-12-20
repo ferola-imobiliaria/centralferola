@@ -5,6 +5,13 @@
 @section('content')
     <div class="card card-danger card-outline">
         <div class="card-body">
+            <div class="row">
+                <div class="col mb-3 text-right">
+                    <a href="{{ route('team.create') }}" class="btn btn-success">
+                        <i class="fas fa-plus mr-2"></i> Nova equipe
+                    </a>
+                </div>
+            </div>
             <div class="card-columns">
                 @foreach($teams as $team)
                     <div class="card">
