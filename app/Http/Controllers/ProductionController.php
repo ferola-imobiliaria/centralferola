@@ -61,6 +61,13 @@ class ProductionController extends Controller
                         'proposals' => $producao['propostas'],
                     ]
                 );
+            } else {
+                $existRow = Production::where('date', $producoesRequest[$key]['date'])
+                    ->where('user_id', Auth::id());
+
+                if ($existRow->exists()) {
+                    $existRow->delete();
+                }
             }
         }
 
