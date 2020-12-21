@@ -7,20 +7,14 @@ use App\PointsTableInfo;
 use App\Production;
 use App\Repositories\CommissionRepository;
 use App\Repositories\ProductionRepository;
-use App\Team;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use TJGazel\Toastr\Facades\Toastr;
 
 class PointsTableController extends Controller
 {
-
-    private $user;
     private $quarter;
     private $year;
-    private $productions;
     private $commissionRepository;
     private $productionRepository;
 
@@ -56,37 +50,6 @@ class PointsTableController extends Controller
         $this->year = $year;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProductions()
-    {
-        return $this->productions;
-    }
-
-    /**
-     * @param mixed $productions
-     */
-    public function setProductions($productions): void
-    {
-        $this->productions = $productions;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user): void
-    {
-        $this->user = $user;
-    }
 
     public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository)
     {
@@ -96,20 +59,7 @@ class PointsTableController extends Controller
 
     public function index()
     {
-        switch (Auth::user()->profile) {
-            case 'realtor' :
-                $this->setUser(Auth::user());
-            case 'supervisor' :
-                $user = $this->getUser() ? $this->getUser() : Auth::user();
-                $this->setUser($user);
-                $teams = $this->getUser()->team()->get();
-                break;
-            case 'admin' :
-                $teams = Team::orderBy('name', 'asc')->get();
-                break;
-            default:
-                exit();
-        }
+        $user = Auth::user();
 
         $year = ($this->getYear() == null) ? date('Y') : $this->getYear();
         $this->setYear($year);
@@ -124,20 +74,11 @@ class PointsTableController extends Controller
 
         $monthsOfQuarter = monthsOfQuarter($this->getQuarter());
 
-        // Set productions
-        if ($this->getUser()) {
-            $productions = PointsTable::getValuesQuarter($this->getUser(), $this->getQuarter(), $this->getYear());
-        }
+        $qtdFields['plaques'] = Production::sumFieldProduction($user, 'plaques', monthsOfQuarter($this->getQuarter()), $year);
+        $qtdFields['published_ads'] = Production::sumFieldProduction($user, 'published_ads', monthsOfQuarter($this->getQuarter()), $year);
+        $qtdFields['exclusivities'] = Production::sumFieldProduction($user, 'captured_exclusivities', monthsOfQuarter($this->getQuarter()), $year);
 
-        $this->setProductions($productions ?? null);
-
-        if (isset($this->user->id)) {
-            $qtdFields['plaques'] = Production::sumFieldProduction($this->user->id, 'plaques', monthsOfQuarter($this->getQuarter()), 2020);
-            $qtdFields['published_ads'] = Production::sumFieldProduction($this->user->id, 'published_ads', monthsOfQuarter($this->getQuarter()), 2020);
-            $qtdFields['exclusivities'] = Production::sumFieldProduction($this->user->id, 'captured_exclusivities', monthsOfQuarter($this->getQuarter()), 2020);
-
-            $infos = PointsTableInfo::infos($this->getUser(), $this->getQuarter(), $this->getYear());
-        }
+        $infos = PointsTableInfo::infos($user, $this->getQuarter(), $this->getYear());
 
         $salesRealtor = $this->commissionRepository->getQtdSalesRealtor($user)->only($monthsOfQuarter);
         foreach ($salesRealtor as $sale) {
@@ -145,14 +86,14 @@ class PointsTableController extends Controller
         }
 
         return view('points-table.index', [
-            'productions' => $this->productionRepository->getIndividualYearProduction($this->getUser())->only($monthsOfQuarter),
+            'productions' => $this->productionRepository->getIndividualYearProduction($user)->only($monthsOfQuarter),
             'qtdSalesRealtor' => $qtdSalesRealtor,
             'quarter' => $this->getQuarter(),
             'year' => $this->getYear(),
             'monthsOfQuarter' => $monthsOfQuarter,
             'teams' => $teams ?? null,
             'pointsTable' => $pointsTable ?? null,
-            'realtorSelected' => $this->getUser()->id ?? null,
+            'realtorSelected' => $user->id ?? null,
             'qtdFields' => $qtdFields ?? null,
             'infos' => $infos ?? null
         ]);
@@ -165,16 +106,6 @@ class PointsTableController extends Controller
      */
     public function show(Request $request)
     {
-        $user_profile = Auth::user()->profile;
-
-        if ($user_profile != 'realtor') {
-            $request->validate([
-                'realtor' => 'required|integer',
-            ]);
-            $user = User::find($request->realtor);
-            $this->setUser($user);
-        }
-
         $this->setQuarter($request->quarter);
         $this->setYear($request->year);
 
@@ -187,6 +118,10 @@ class PointsTableController extends Controller
      */
     public function storePointsTargets(Request $request)
     {
+        if (Auth::user()->profile != 'admin') {
+            abort(404);
+        }
+
         PointsTable::updateOrCreate(
             [
                 'year' => date('Y')

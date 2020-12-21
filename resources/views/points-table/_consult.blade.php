@@ -4,23 +4,6 @@
             @csrf
 
             <div class="row align-items-center">
-                @can('is-admin-or-supervisor')
-                    <div class="col-sm">
-                        <select class="form-control select2bs4" name="realtor" id="realtor" style="width: 100%;">
-                            <option value="" selected>» Corretor «</option>
-                            @foreach($teams as $team)
-                                <optgroup label="{{ $team->name }}">
-                                    @foreach($team->users->sortBy('name_short') as $user)
-                                        <option value="{{ $user->id }}"
-                                                @if(($realtorSelected ?? 0) == $user->id) selected @endif>
-                                            {{ $user->name_short }}
-                                        </option>
-                                    @endforeach
-                                </optgroup>
-                            @endforeach
-                        </select>
-                    </div>
-                @endcan
                 <div class="col-sm">
                     <select class="custom-select" name="quarter" id="quarter">
                         <option value="1" @if($quarter == 1) selected @endif>1º trimestre</option>

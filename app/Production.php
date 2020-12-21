@@ -31,7 +31,6 @@ class Production extends Model
     }
 
 
-
     /**
      * Função que retorna a soma individual dos itens da produção mensal do usuário
      * @param $user_id
@@ -88,9 +87,9 @@ class Production extends Model
      * @param int $year
      * @return
      */
-    public static function sumFieldProduction(int $user_id, string $field, array $months, int $year)
+    public static function sumFieldProduction(User $user, string $field, array $months, int $year)
     {
-        $production = User::findOrFail($user_id)
+        $production = $user
             ->productions()
             ->select(
                 DB::raw("SUM({$field}) as value")
