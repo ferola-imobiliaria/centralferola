@@ -7,6 +7,7 @@ use App\PointsTable;
 use App\Production;
 use App\Report;
 use App\Repositories\CommissionRepository;
+use App\Repositories\ProductionRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ class ReportController extends Controller
 {
     private $quarter;
     private $commissionRepository;
+    private $productionRepository;
 
     /**
      * @return mixed
@@ -32,11 +34,12 @@ class ReportController extends Controller
         $this->quarter = $quarter;
     }
 
-    public function __construct(CommissionRepository $commissionRepository)
+    public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository)
     {
         $this->middleware('can:is-admin-or-supervisor');
 
         $this->commissionRepository = $commissionRepository;
+        $this->productionRepository = $productionRepository;
 
         if (!$this->getQuarter()) {
             $this->setQuarter(currentQuarter());
@@ -122,7 +125,6 @@ class ReportController extends Controller
     {
         $user = User::find($request->realtor);
 
-        $productions = PointsTable::getValuesQuarter($user, $request->quarter, $request->year);
         $pointsTable = PointsTable::where('year', date('Y'))->first();
         $monthsOfQuarter = monthsOfQuarter($request->quarter);
 
@@ -134,7 +136,7 @@ class ReportController extends Controller
         return view('reports.points-table', [
             'teams' => Report::getTeam(),
             'quarter' => $request->quarter,
-            'productions' => $productions,
+            'productions' => $this->productionRepository->getIndividualYearProduction($user)->only($monthsOfQuarter),
             'realtorSelected' => $request->realtor,
             'pointsTable' => $pointsTable,
             'monthsOfQuarter' => $monthsOfQuarter,
