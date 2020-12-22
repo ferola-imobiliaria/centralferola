@@ -107,13 +107,15 @@ class ProductionRepository implements ProductionRepositoryInterface
      * @param int|null $year
      * @return mixed
      */
-    public function getRankingProduction(string $field, string $store, int $year = null)
+    public function getRankingProduction(string $field, string $store = null, int $year = null)
     {
         $year = $year ?? date('Y');
 
         $data = CommissionsControl::join('users', 'users.id', '=', 'commissions_controls.user_id')
             ->selectRaw("users.*, SUM($field) as $field")
-            ->where('commissions_controls.store', $store)
+            ->when($store, function ($query, $store) {
+                return $query->where('commissions_controls.store', $store);
+            })
             ->whereYear('sale_date', $year)
             ->groupBy('user_id')
             ->orderBy($field, 'desc')
@@ -121,7 +123,6 @@ class ProductionRepository implements ProductionRepositoryInterface
 
         return $data;
     }
-
 
     public function getProductionMonth(User $user, int $month, int $year = null)
     {

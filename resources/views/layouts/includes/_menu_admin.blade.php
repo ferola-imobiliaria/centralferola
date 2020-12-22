@@ -13,6 +13,13 @@
 </li>
 
 <li class="nav-item">
+    <a href="{{ route('placings.index') }}" class="nav-link {{ isActive('placings.index') }}">
+        <i class="nav-icon fas fa-medal"></i>
+        <p>Classificações</p>
+    </a>
+</li>
+
+<li class="nav-item">
     <a href="{{ route('financial.index') }}" class="nav-link {{ isActive('financial.index') }}">
         <i class="nav-icon fas fa-dollar-sign"></i>
         <p>Financeiro</p>

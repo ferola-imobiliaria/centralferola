@@ -44,10 +44,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Teams
         Route::resource('equipes', 'TeamController')->names('team')->middleware('can:is-admin');
-//            Route::get('/', 'TeamController@index')->name('index');
-//            Route::put('/atualizar/{team}', 'TeamController@update')->name('update');
-//            Route::get('/criar', 'TeamController@create')->name('create');
-        //Route::resource('controle-comissao', 'CommissionsControlController')->names('commissions-control');
+
+        // Placings
+        Route::get('classificacoes', 'PlacingController@index')->name('placings.index')->middleware('can:is-admin');;
 
         // Productions
         Route::name('production.')->prefix('producao')->group(function () {
