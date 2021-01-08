@@ -112,7 +112,7 @@
                                     {{ strtoupper(__($store)) }}
                                 </span>
                                 <h2 class="info-box-number">
-                                    {{ number_format($vgv[date('m')], 2, ',', '.') }}
+                                    {{ number_format($vgv[date('m')] ?? 0, 2, ',', '.') }}
                                 </h2>
                             </div>
                             <!-- /.info-box-content -->
@@ -126,7 +126,7 @@
                                     TOTAL
                                 </span>
                             <h2 class="info-box-number">
-                                {{ number_format($totalVgv[date('m')], 2, ',', '.') }}
+                                {{ number_format($totalVgv[date('m')] ?? 0, 2, ',', '.') }}
                             </h2>
                         </div>
                         <!-- /.info-box-content -->
@@ -259,7 +259,7 @@
                                     {{ strtoupper(__($store)) }}
                                 </span>
                                     <h2 class="info-box-number">
-                                        {{ number_format($vgv[date('m')], 2, ',', '.') }}
+                                        {{ number_format($vgv[date('m')] ?? 0, 2, ',', '.') }}
                                     </h2>
                                 </div>
                                 <!-- /.info-box-content -->
@@ -275,7 +275,7 @@
                                     TOTAL
                                 </span>
                                 <h2 class="info-box-number">
-                                    {{ number_format($totalCommission[date('m')], 2, ',', '.') }}
+                                    {{ number_format($totalCommission[date('m')] ?? 0, 2, ',', '.') }}
                                 </h2>
                             </div>
                             <!-- /.info-box-content -->
