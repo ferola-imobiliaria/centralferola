@@ -125,10 +125,11 @@ class ReportController extends Controller
     {
         $user = User::find($request->realtor);
 
-        $pointsTable = PointsTable::where('year', date('Y'))->first();
+        $pointsTable = PointsTable::where('year', $request->year)->first();
         $monthsOfQuarter = monthsOfQuarter($request->quarter);
 
         $salesRealtor = $this->commissionRepository->getQtdSalesRealtor($user)->only($monthsOfQuarter);
+
         foreach ($salesRealtor as $sale) {
             $qtdSalesRealtor[] = $sale;
         }
@@ -136,8 +137,9 @@ class ReportController extends Controller
         return view('reports.points-table', [
             'teams' => Report::getTeam(),
             'quarter' => $request->quarter,
-            'productions' => $this->productionRepository->getIndividualYearProduction($user)->only($monthsOfQuarter),
+            'productions' => $this->productionRepository->getIndividualYearProduction($user, $request->year)->only($monthsOfQuarter),
             'realtorSelected' => $request->realtor,
+            'yearSelected' => $request->year,
             'pointsTable' => $pointsTable,
             'monthsOfQuarter' => $monthsOfQuarter,
             'qtdSalesRealtor' => $qtdSalesRealtor

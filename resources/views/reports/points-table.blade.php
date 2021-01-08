@@ -76,7 +76,7 @@
     @isset($realtorSelected)
         <div class="card">
             <div class="card-header">
-                <h4>{{ $quarter }}º trimeste de {{ date('Y') }}</h4>
+                <h4>{{ $quarter }}º trimeste de {{ $yearSelected }}</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
