@@ -69,7 +69,10 @@ class HomeController extends Controller
         // Dados da produção do mês do usuário
         $userMonthProduction = Production::userMonthProduction($user->id, date('m'), date('Y'));
         $userMonthProduction->put('vgv', $this->commissionRepository->getVgvRealtor($user, date('m')));
-        $userMonthProduction->put('sales', $user->commissions()->whereMonth('sale_date', date('m'))->count());
+        $userMonthProduction->put('sales', $user->commissions()
+            ->whereMonth('sale_date', date('m'))
+            ->whereYear('sale_date', date('Y'))
+            ->count());
 
 
         // Dados da produção do ano do usuário
