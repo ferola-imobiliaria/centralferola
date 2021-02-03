@@ -20,8 +20,8 @@ $('#sale_value').on('change', function () {
  * @param per
  */
 function calcCommission(value, per) {
-    let commission = parseFloat(value * per) / 100;
-    return commission;
+    let commission = value * per / 100;
+    return parseInt(commission);
 }
 
 
