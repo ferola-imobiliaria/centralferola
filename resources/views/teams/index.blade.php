@@ -24,6 +24,13 @@
                                data-team-store="{{ $team->store }}">
                                 <i class="far fa-edit"></i>
                             </a>
+                            <a href="#" class="ml-2" onclick="destroyTeam('{{ $team->id }}')"
+                               data-toggle="modal"
+                               data-target="#destroyTeam"
+                               data-team-name="{{ $team->name }}"
+                               data-id="{{ $team->id }}">
+                                <i class="fas fa-trash text-danger ml-1"></i>
+                            </a>
                             <div class="card-tools">
                                 <span
                                     class="badge badge-{{ storeColors($team->store, "colorName") }}"> {{ ucfirst(__($team->store)) }}</span>
@@ -33,15 +40,21 @@
                         <!-- /.card-header -->
                         <div class="card-body p-0 shadow rounded">
                             <ul class="users-list">
-                                @foreach($team->users as $member)
-                                    <li class="col-sm-4">
-                                        <img
-                                            src="{{ asset('storage/' . ($member->photo ?? '../images/no_photo.png')) }}"
-                                            alt="{{ $member->name_short }}">
-                                        <a class="users-list-name" href="#">{{ $member->name_short }}</a>
-                                        <span class="users-list-date">{{ $member->name }}</span>
+                                @if($team->users->count() > 0)
+                                    @foreach($team->users as $member)
+                                        <li class="col-sm-4">
+                                            <img
+                                                src="{{ asset('storage/' . ($member->photo ?? '../images/no_photo.png')) }}"
+                                                alt="{{ $member->name_short }}">
+                                            <a class="users-list-name" href="#">{{ $member->name_short }}</a>
+                                            <span class="users-list-date">{{ $member->name }}</span>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <li>
+                                        <span class="text-danger text-bold">Nenhum supervisor ou corretor cadastrado nessa equipe</span>
                                     </li>
-                                @endforeach
+                                @endif
                             </ul>
                             <!-- /.users-list -->
                         </div>
@@ -52,7 +65,7 @@
         </div>
 
 
-        <!-- Modal -->
+        <!-- Modal Edit Team-->
         <div class="modal fade" id="editTeam" tabindex="-1" role="dialog" aria-labelledby="editTeamTitle"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -90,6 +103,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal Destroy Team-->
+        <div class="modal fade" id="destroyTeam" tabindex="-1" role="dialog" aria-labelledby="destroyTeamTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Excluir Equipe</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Confirmar a exclusão da equipe <span id="destroyTeamName"
+                                                                 class="text-uppercase text-bold"></span>?</h5>
+                        <small>
+                            <i class="fas fa-asterisk"></i> Só é possível excluir uma equipe se não existir nenhum
+                            corretor ou supervisor associado a
+                            ela.
+                        </small>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="" id="formDestroyTeam" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-outline-light" data-dismiss="modal"><b>Não</b></button>
+                            <button type="submit" class="btn btn-outline-light">Sim</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @endsection
 
         @section('js')
@@ -120,5 +166,24 @@
                         $("#formEditTeam").submit();
                     });
                 })
+
+
+                // Modal Destroy Team
+                $('#destroyTeam').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var teamName = button.data("team-name") // Extract info from data-* attributes
+                    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                    var modal = $(this)
+                    modal.find('#destroyTeamName').text(teamName)
+                    console.log(teamName);
+                })
+
+                // Function Destroy Team
+                function destroyTeam(id) {
+                    var id = id;
+                    var url = '{{ route("team.destroy", ":id") }}';
+                    url = url.replace(':id', id);
+                    $("#formDestroyTeam").attr('action', url);
+                }
             </script>
 @endsection

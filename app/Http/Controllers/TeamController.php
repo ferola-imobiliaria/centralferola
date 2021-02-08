@@ -129,6 +129,19 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hasUser = User::where('team_id', $id)->count();
+
+        if (!$hasUser) {
+            $team = Team::find($id);
+            if ($team->delete()) {
+                Toastr::success("Equipe <b>$team->name</b> excluída com sucesso!");
+            } else {
+                Toastr::error("Não foi possível excluir a equipe. Tente novamente.", "Error");
+            }
+        } else {
+            Toastr::error("Não é possível exluir uma equipe que não esteja vazia.", "Error");
+        }
+
+        return redirect()->route('team.index');
     }
 }
