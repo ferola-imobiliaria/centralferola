@@ -6,6 +6,7 @@ use App\PointsTable;
 use App\PointsTableInfo;
 use App\Production;
 use App\Repositories\CommissionRepository;
+use App\Repositories\PointsTableRepository;
 use App\Repositories\ProductionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ class PointsTableController extends Controller
     private $year;
     private $commissionRepository;
     private $productionRepository;
+    private $pointsTableRepository;
 
     /**
      * @return mixed
@@ -51,10 +53,11 @@ class PointsTableController extends Controller
     }
 
 
-    public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository)
+    public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository, PointsTableRepository $pointsTableRepository)
     {
         $this->commissionRepository = $commissionRepository;
         $this->productionRepository = $productionRepository;
+        $this->pointsTableRepository = $pointsTableRepository;
     }
 
     public function index()
@@ -95,7 +98,9 @@ class PointsTableController extends Controller
             'pointsTable' => $pointsTable ?? null,
             'realtorSelected' => $user->id ?? null,
             'qtdFields' => $qtdFields ?? null,
-            'infos' => $infos ?? null
+            'infos' => $infos ?? null,
+            'quarterTarget' => $this->pointsTableRepository->getQuarterTarget(currentQuarter()),
+            'myPoints' => $this->pointsTableRepository->getQuarterTotalScore($user, currentQuarter())
         ]);
     }
 

@@ -72,7 +72,7 @@
                         <tfoot>
                         <tr class="bg-gray-light">
                             <td colspan="6" class="text-right"><strong>Total do trimestre:</strong></td>
-                            <td class="text-center text-bold totalQuarterPoints">0</td>
+                            <td class="text-center text-bold">{{ number_format($myPoints, 0, '', '.') }}</td>
                         </tr>
                         </tfoot>
                     </table>
