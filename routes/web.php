@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::name('report.')->prefix('relatorios')->group(function () {
             Route::get('/producao', 'ReportController@indexProduction')->name('production.índex');
             Route::post('/producao', 'ReportController@showProduction')->name('production.show');
+            Route::post('/producao/equipe', 'ReportController@showTeamProduction')->name('team.production.show');
             Route::get('/tabela-pontos', 'ReportController@indexPointsTable')->name('points-table.index');
             Route::post('/tabela-pontos', 'ReportController@showPointsTable')->name('points-table.show');
             Route::get('/controle-comissoes', 'ReportController@indexComissionsControl')->name('commissions-control.index');
