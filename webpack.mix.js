@@ -98,6 +98,10 @@ mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('node_modules/summernote/dist/font', 'public/css/summernote/font')
     // FIM Summernote
 
+    // printThis
+    .scripts('node_modules/print-this/printThis.js', 'public/js/printThis.js')
+    // FIM printThis
+
     .options({
         processCssUrls: false
     })

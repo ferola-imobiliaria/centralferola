@@ -6,46 +6,46 @@ namespace App\Repositories;
 
 use App\CommissionsControl;
 use App\Helpers\Date;
-use App\Production;
 use App\Team;
 use App\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+
 
 class ProductionRepository implements ProductionRepositoryInterface
 {
 
-    //testar essa função, pois ela não está finalizada
-    public function getTeamProduction(int $team, int $year = null)
+    public function getTeamProduction(int $team, int $month, int $year = null)
     {
         $year = $year ?? date('Y');
 
         $team = Team::findOrFail($team);
 
+        $data = collect([]);
+
         foreach ($team->users as $user) {
-            $productions = $user->productions()
-                ->selectRaw("
-                MONTH(date) as month,
-                COALESCE(user_id, $user->id) as user_id,
-                COALESCE (users.name, '$user->name')  as name,
-                COALESCE(SUM(captured_properties), 0) as captured_properties,
-                COALESCE(SUM(captured_exclusivities), 0) as captured_exclusivities,
-                COALESCE(SUM(published_ads), 0) as published_ads,
-                COALESCE(SUM(plaques), 0) as plaques,
-                COALESCE(SUM(captures_sold), 0) as captures_sold,
-                COALESCE(SUM(sales), 0) as sales,
-                COALESCE(SUM(vgv), 0) as vgv,
-                COALESCE(SUM(proposals), 0) as proposals,
-                COALESCE(SUM(exclusivities_sold), 0) as exclusivities_sold
-                ")
-                ->join('users', 'users.id', '=', 'productions.user_id')
-                ->whereYear('date', $year)
-                ->groupBy(DB::raw('MONTH(date)'))
-                ->get();
+            $data->put($user->name_short,
+                $user->productions()
+                    ->selectRaw("
+                        COALESCE(SUM(captured_properties), 0) as captured_properties,
+                        COALESCE(SUM(captured_exclusivities), 0) as captured_exclusivities,
+                        COALESCE(SUM(published_ads), 0) as published_ads,
+                        COALESCE(SUM(plaques), 0) as plaques,
+                        COALESCE(SUM(proposals), 0) as proposals
+                    ")
+                    ->whereMonth('date', $month)
+                    ->whereYear('date', $year)
+                    ->first()
+            );
+
+//            Arr::add($data[$user->name_short], 'sales', $user->commissions()
+//                ->whereMonth('sale_date', $month)
+//                ->whereYear('sale_date', $year)
+//                ->count());
+
+
         }
 
-        return $productions;
-
-
+        return $data;
     }
 
     /**

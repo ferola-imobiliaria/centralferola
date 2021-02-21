@@ -29,5 +29,6 @@
     "/css/select2.css": "/css/select2.css",
     "/js/summernote-bs4.js": "/js/summernote-bs4.js",
     "/js/summernote-pt-BR.js": "/js/summernote-pt-BR.js",
-    "/css/summernote/summernote-bs4.css": "/css/summernote/summernote-bs4.css"
+    "/css/summernote/summernote-bs4.css": "/css/summernote/summernote-bs4.css",
+    "/js/printThis.js": "/js/printThis.js"
 }
