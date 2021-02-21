@@ -17,35 +17,4 @@ $(function () {
 
         totalMonth = 0;
     });
-
-
-    /**
-     *Cálculo total dos pontos no trimestre
-     */
-    let totalQuarter = 0;
-
-    $(this).find('table#pointsTable tbody tr td:last-child').each(function () {
-        totalQuarter += parseInt($(this).text());
-    });
-    $('.totalQuarterPoints').text(totalQuarter);
-
-    /**
-     * Quantidade de pontos que faltam para atingir a meta
-     */
-    let missingPoints = parseInt($('#targetPoints').text()) - totalQuarter;
-    $('#missingPoints').text(missingPoints);
-
-    /**
-     * Meta de pontos do trimestre
-     */
-    let targetPoints = $('#targetPoints').text();
-    $('.targetPoints').text(targetPoints);
-
-    /**
-     * Barra de progresso da meta de pontos
-     */
-    let percentTarget = totalQuarter / targetPoints * 100;
-    console.log(totalQuarter);
-    $('#progress-bar').css('width', percentTarget + '%');
-
 });
