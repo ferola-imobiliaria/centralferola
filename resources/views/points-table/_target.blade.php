@@ -21,7 +21,12 @@
 
                 <div class="progress progress-bar-striped progress-bar-animated">
                     <div class="progress-bar bg-info"
-                        style="width: {{ ($myPoints / $quarterTarget) * 100 }}%">
+                        @if ($quarterTarget)
+                            style="width: {{ ($myPoints / $quarterTarget) * 100 }}%"
+                        @else
+                            style="width: 0"
+                        @endif
+                    >
                     </div>
                 </div>
             </div>
