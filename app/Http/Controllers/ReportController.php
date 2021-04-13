@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\CommissionsControl;
-use App\PointsTable;
-use App\Production;
-use App\Report;
-use App\Repositories\CommissionRepository;
-use App\Repositories\ProductionRepository;
 use App\Team;
 use App\User;
-use Illuminate\Http\Request;
+use App\Report;
+use App\Production;
+use App\PointsTable;
+use App\CommissionsControl;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CommissionRepository;
+use App\Repositories\ProductionRepository;
+use App\Repositories\PointsTableRepository;
 
 class ReportController extends Controller
 {
     private $quarter;
     private $commissionRepository;
     private $productionRepository;
+    private $pointsTableRepository;
 
     /**
      * @return mixed
@@ -36,12 +38,13 @@ class ReportController extends Controller
         $this->quarter = $quarter;
     }
 
-    public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository)
+    public function __construct(CommissionRepository $commissionRepository, ProductionRepository $productionRepository, PointsTableRepository $pointsTableRepository)
     {
         $this->middleware('can:is-admin-or-supervisor');
 
         $this->commissionRepository = $commissionRepository;
         $this->productionRepository = $productionRepository;
+        $this->pointsTableRepository = $pointsTableRepository;
 
         if (!$this->getQuarter()) {
             $this->setQuarter(currentQuarter());
@@ -179,7 +182,8 @@ class ReportController extends Controller
             'yearSelected' => $request->year,
             'pointsTable' => $pointsTable,
             'monthsOfQuarter' => $monthsOfQuarter,
-            'qtdSalesRealtor' => $qtdSalesRealtor
+            'qtdSalesRealtor' => $qtdSalesRealtor,
+            'myPoints' => $this->pointsTableRepository->getQuarterTotalScore($user, $request->quarter ?? currentQuarter())
         ]);
     }
 }
