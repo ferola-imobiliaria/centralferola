@@ -100,7 +100,7 @@ class PointsTableController extends Controller
             'qtdFields' => $qtdFields ?? null,
             'infos' => $infos ?? null,
             'quarterTarget' => $this->pointsTableRepository->getQuarterTarget(currentQuarter()),
-            'myPoints' => $this->pointsTableRepository->getQuarterTotalScore($user, currentQuarter())
+            'myPoints' => $this->pointsTableRepository->getQuarterTotalScore($user, $this->getQuarter() ?? currentQuarter())
         ]);
     }
 
