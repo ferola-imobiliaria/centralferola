@@ -11,7 +11,7 @@ use phputil\extenso\Extenso;
 class ReceiptController extends Controller
 {
 
-    private $types = ['corretor', 'supervisor', 'exclusivo', 'captador'];
+    private $types = ['ferola', 'corretor', 'supervisor', 'exclusivo', 'captador'];
 
     public function index()
     {
@@ -40,24 +40,32 @@ class ReceiptController extends Controller
 
         $e = new Extenso();
 
-        $commissionControl = CommissionsControl::where('uuid', $uuid)
-            ->where('user_id', Auth::user()->id)
-            ->first();
+        if (Auth::user()->profile === 'admin') {
+            $commissionControl = CommissionsControl::where('uuid', $uuid)
+                ->first();
+        } else {
+            $commissionControl = CommissionsControl::where('uuid', $uuid)
+                ->where('user_id', Auth::user()->id)
+                ->first();
+        }
 
         switch ($type) {
-            case 'corretor' :
+            case 'ferola':
+                $commissionValue = $commissionControl->real_estate_commission + $commissionControl->supervisor_commission;
+                break;
+            case 'corretor':
                 $commissionValue = $commissionControl->realtor_commission;
                 break;
-            case 'supervisor' :
+            case 'supervisor':
                 $commissionValue = $commissionControl->supervisor_commission;
                 break;
-            case 'exclusivo' :
+            case 'exclusivo':
                 $commissionValue = $commissionControl->exclusive_commission;
                 break;
-            case 'captador' :
+            case 'captador':
                 $commissionValue = $commissionControl->catcher_commission;
                 break;
-            default :
+            default:
                 exit();
         }
 
@@ -68,6 +76,5 @@ class ReceiptController extends Controller
         ]);
 
         return $pdf->stream();
-
     }
 }

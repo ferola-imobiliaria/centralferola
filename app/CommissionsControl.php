@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Winners\CommisionControl;
 
 class CommissionsControl extends Model
 {
@@ -62,9 +63,14 @@ class CommissionsControl extends Model
 
     public static function getCommissionsControlUser()
     {
-        $commissionsControl = CommissionsControl::where('user_id', Auth::user()->id)
-            ->orderBy('sale_date', 'desc')
-            ->get();
+        if(Auth::user()->profile !== 'admin')
+        {
+            $commissionsControl = CommissionsControl::where('user_id', Auth::user()->id)
+                ->orderBy('sale_date', 'desc')
+                ->get();
+        } else {
+            $commissionsControl = CommissionsControl::orderBy('id', 'desc')->get();
+        }
 
         return $commissionsControl;
     }
