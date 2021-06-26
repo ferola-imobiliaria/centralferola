@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group col-sm">
                         <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-share"></i>
+                            Gerar recibos <i class="fas fa-share ml-2"></i>
                         </button>
                     </div>
                 </div>
@@ -44,6 +44,37 @@
     @isset($commission)
         <div class="card card-danger card-outline">
             <div class="card-body">
+
+                @can('is-admin')
+                    <div class="row justify-content-md-center">
+                        <!-- RECIBO FEROLA -->
+                        <div class="col-lg-4">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h4>FEROLA</h4>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <i class="fas fa-user-tie mr-2"></i> {{ env('APP_NAME') }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-money-bill-alt mr-2"></i>
+                                            R$ {{ number_format($commission->real_estate_commission, 2, ',', '.') }}
+                                            @if ($commission->supervisor_commission)
+                                            + R$ {{ number_format($commission->supervisor_commission, 2, ',', '.') }}
+                                            (comissão supervisão)
+                                            @endif
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="{{ route('receipt.generate', ['ferola',  $commission->uuid]) }}"
+                                class="small-box-footer btn" target="_new">Visualizar recibo <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @endcan
+
                 <div class="row">
                     <!-- RECIBO CORRETOR -->
                     <div class="col-lg-3 col-sm-12">
@@ -126,7 +157,7 @@
                     <!-- RECIBO CAPTADOR -->
                     <div class="col-lg-3 col-sm-12">
                         <!-- small box -->
-                        <div class="small-box bg-danger">
+                        <div class="small-box bg-navy">
                             <div class="inner">
                                 <h4>CAPTADOR</h4>
                                 <ul class="list-group list-group-unbordered mb-3">
@@ -146,6 +177,7 @@
                     </div>
                     <!-- ./col -->
                 </div>
+
             </div>
         </div>
     @endisset

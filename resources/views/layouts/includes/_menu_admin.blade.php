@@ -26,6 +26,13 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{ route('receipt.index') }}" class="nav-link {{ isActive('receipt.index') }}">
+        <i class="nav-icon fas fa-receipt"></i>
+        <p>Recibos</p>
+    </a>
+</li>
+
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link">
         <i class="nav-icon fas fa-file-alt"></i>
