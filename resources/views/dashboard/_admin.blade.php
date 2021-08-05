@@ -427,7 +427,7 @@
                                         <span class="badge badge-info float-right">{{ $loop->iteration }}º</span>
                                     </span>
                                     <span class="product-description">
-                                        {{ $realtor->name_short }} ({{$realtors->where('id', $realtor->id)->first()->team->name}})
+                                        {{ $realtor->name_short }} ({{$realtors->where('id', $realtor->id)->first()->team->name ?? ''}})
                                     </span>
                                 </div>
                             </li>
