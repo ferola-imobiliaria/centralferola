@@ -101,8 +101,13 @@ class UserController extends Controller
     {
         $this->policies($user);
 
-        if ($user->delete()) {
-            Toastr::success("O usuário <b>{$user->name_short}</b> foi excluído com sucesso");
+        if (($user->profile === 'supervisor') && ($user->team->users->count() > 1)) {
+            Toastr::error("<b>{$user->name}</b> é supervisor da equipe <b>{$user->team->name}</b>. Para excluí-lo é necessário que a equipe não tenha mais nenhum corretor.",
+                null, ['timeOut' => 15000]);
+        } else {
+            if ($user->delete()) {
+                Toastr::success("O usuário <b>{$user->name_short}</b> foi excluído com sucesso");
+            }
         }
 
         return redirect()->route('user.index');

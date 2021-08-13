@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/', 'UserController@index')->name('index');
                 Route::delete('/user/{user}', 'UserController@destroy')->name('destroy');
                 Route::get('/lixeira', 'UserController@trashed')->name('trashed');
-                Route::get('{user}/restore', 'UserController@restore')->name('restore');
+                Route::get('{uuid}/restore', 'UserController@restore')->name('restore');
                 Route::delete('/{user}/destroyPermanently', 'UserController@destroyPermanently')
                     ->name('destroyPermanently');
             });
