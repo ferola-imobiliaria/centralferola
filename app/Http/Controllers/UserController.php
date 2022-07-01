@@ -21,6 +21,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
+        $teste = User::join('teams', 'teams.id', '=', 'users.team_id')
+            ->get('*');
+
         if ($user->profile === 'admin') {
             $users = User::join('teams', 'teams.id', '=', 'users.team_id')
                 ->orderBy('name_short', 'asc')
