@@ -22,7 +22,9 @@ class UserController extends Controller
         $user = Auth::user();
 
         if ($user->profile === 'admin') {
-            $users = User::orderBy('name_short', 'asc')->get();
+            $users = User::join('teams', 'teams.id', '=', 'users.team_id')
+                ->orderBy('name_short', 'asc')
+                ->get('*');
         } else if ($user->profile === 'supervisor') {
             //Pega os times do supervisor
             $supervisorTeam = $user->team;
