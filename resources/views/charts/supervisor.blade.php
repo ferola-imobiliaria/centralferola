@@ -19,12 +19,14 @@
             <form action="{{ route('chart.supervisor.show', $type) }}" method="post">
                 @csrf
 
+
                 <div class="row">
                     <div class="form-group col-md">
                         <select class="form-control select2bs4" name="realtor" id="realtor" style="width: 100%;"
                                 data-placeholder="Selecione o corretor">
                             <option value=""></option>
-                            @foreach($team->users->sortBy('name_short') as $user)
+
+                            @foreach($team as $user)
                                 <option value="{{ $user->id }}"
                                         @if(($realtorSelected ?? 0) == $user->id) selected @endif>
                                     {{ $user->name_short }}
@@ -75,6 +77,7 @@
                                 </option>
                             </select>
                         @elseif($type == 'comissao')
+
                             <select class="form-control select2bs4" name="field" id="field" style="width: 100%;"
                                     data-placeholder="Selecione o item">
                                 <option value=""></option>

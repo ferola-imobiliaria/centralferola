@@ -6,6 +6,7 @@ use App\Charts\ChartReports;
 use App\Repositories\CommissionRepository;
 use App\Repositories\ProductionRepository;
 use App\Repositories\TeamRepository;
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,17 +18,25 @@ class ChartSupervisorController extends Controller
     private $productionRepository;
     private $commissionRepository;
 
-    public function __construct(TeamRepository $teamRepository, ProductionRepository $productionRepository, CommissionRepository $commissionRepository)
+    public function __construct(TeamRepository $teamRepository, ProductionRepository $productionRepository, UserRepository $userRepository, CommissionRepository $commissionRepository)
     {
         $this->teamRepository = $teamRepository;
         $this->productionRepository = $productionRepository;
         $this->commissionRepository = $commissionRepository;
+        $this->userRepository = $userRepository;
+
+
     }
 
     public function index($type)
     {
+         $users = Auth::user();
+         $team = $this->userRepository->getUserTeamById($users->id);
+
+         $teams = ($users->profile == 'admin') ? $this->userRepository->getAll() : $this->userRepository->getUsersTeamByTeam($team);;
+
         return view('charts.supervisor', [
-            'team' => $this->teamRepository->getTeam(),
+            'team' => $teams,
             'type' => $type
         ]);
     }
@@ -40,8 +49,10 @@ class ChartSupervisorController extends Controller
      */
     public function show(Request $request, $type)
     {
+        $team = $this->userRepository->getUserTeamById($request->realtor);
+
         return view('charts.supervisor', [
-            'team' => $this->teamRepository->getTeam(),
+            'team' => $this->userRepository->getUsersTeamByTeam($team),
             'chart' => $this->chartData($request->realtor, $request->field, $request->year, $type),
             'realtorSelected' => $request->realtor,
             'fieldSelected' => $request->field,

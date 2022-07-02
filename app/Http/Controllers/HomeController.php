@@ -139,7 +139,6 @@ class HomeController extends Controller
     public function indexAdmin()
     {
         $realtors = $this->userRepository->getRealtors();
-
         $colors = [
             'sede' => 'success',
             'noroeste' => 'danger',
@@ -166,7 +165,7 @@ class HomeController extends Controller
 
         return view('home', [
             'colors' => $colors,
-            'teams' => $this->teamRepository->getTeam(),
+            'teams' => $this->userRepository->getUserTeam(),
             'rankingVgvSede' => $this->productionRepository->getRankingProduction('sale_value', 'sede'),
             'rankingVgvNoroeste' => $this->productionRepository->getRankingProduction('sale_value', 'noroeste'),
             'rankingVgvAguasClaras' => $this->productionRepository->getRankingProduction('sale_value', 'aguas_claras'),

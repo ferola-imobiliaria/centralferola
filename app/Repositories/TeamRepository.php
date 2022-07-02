@@ -14,17 +14,15 @@ class TeamRepository implements TeamRepositoryInterface
     {
         $userAuth = Auth::user();
 
-        switch ($userAuth->profile) {
-            case 'supervisor' :
-                $team = $userAuth->team;
-                break;
-            case 'admin' :
-                $team = Team::orderBy('name', 'asc')->get();
-                break;
-            default :
-                exit();
-        }
+        $team = $userAuth->team;
 
         return $team;
+    }
+
+    public function getTeamAll()
+    {
+        $teams = Team::all();
+
+        return $teams;
     }
 }

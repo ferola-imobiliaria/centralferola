@@ -8,4 +8,6 @@ interface TeamRepositoryInterface
 {
 
     public function getTeam();
+
+    public function getTeamAll();
 }

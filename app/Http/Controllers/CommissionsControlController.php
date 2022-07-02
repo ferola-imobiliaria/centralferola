@@ -18,6 +18,7 @@ class CommissionsControlController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
 
         $commissionsControls = $user->commissions;

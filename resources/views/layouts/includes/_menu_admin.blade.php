@@ -65,3 +65,28 @@
         </li>
     </ul>
 </li>
+<li class="nav-item has-treeview">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-chart-bar"></i>
+        <p>
+            Gráficos
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('chart.supervisor.index', 'producao') }}"
+               class="nav-link {{ isActive('chart.supervisor.index') }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Produção anual</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('chart.supervisor.index', 'comissao') }}"
+               class="nav-link {{ isActive('chart.supervisor.index') }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Comissão anual</p>
+            </a>
+        </li>
+    </ul>
+</li>
