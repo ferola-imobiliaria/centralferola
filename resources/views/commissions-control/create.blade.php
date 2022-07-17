@@ -4,6 +4,7 @@
 
 @section('style')
     <link href="{{ asset('css/select2.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet"/>
 @endsection
 
 
@@ -240,7 +241,7 @@
                                             <div class="col-sm-2">
                                                 <label for="exclusive_percentage">Porcentagem</label>
                                                 <div class="input-group">
-                                                    <input type="number" value="5" readonly class="form-control"
+                                                    <input type="number" value="10" readonly class="form-control"
                                                            name="exclusive_percentage"
                                                            id="exclusive_percentage">
                                                     <div class="input-group-append">
@@ -280,7 +281,7 @@
                                     <div class="col-md-2 col-sm-12">
                                         <label for="supervisor_percentage">Porcentagem</label>
                                         <div class="input-group">
-                                            <input type="text" value="2.5" class="form-control"
+                                            <input type="text" value="5" class="form-control"
                                                    name="supervisor_percentage"
                                                    id="supervisor_percentage"
                                                    readonly>
