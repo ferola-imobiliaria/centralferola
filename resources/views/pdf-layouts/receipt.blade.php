@@ -37,8 +37,8 @@
             </p>
             <p style="margin-top: 50px;">Brasília, {{ $commissionControl->sale_date }}.</p>
             <p style="margin-top: 100px;text-align: center;">_______________________________________________
-                <br />{{ mb_strtoupper(env('APP_NAME')) }}
-                <br />CNPJ: {{ env('COMPANY_CNPJ') }}
+                <br />Ferola Empreendimentos Imobiliários
+                <br />CNPJ: 03.903.776.0001/00
             </p>
         </div>
     @endif
