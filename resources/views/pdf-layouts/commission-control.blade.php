@@ -346,7 +346,7 @@
 <p class="c2">
     <span class="c1"
           style="float:left; width: 390px;"><b>EXCLUSIVO:</b> {{ getUserName($commission->exclusive) }}</span>
-    <span class="c1" style="float:left; width: 50px;">&nbsp;5%</span>
+    <span class="c1" style="float:left; width: 50px;">&nbsp;10%</span>
     <span class="c1"
           style="float:left; width: 120px;">R$ {{ number_format($commission->exclusive_commission, 2, ',', '.') }}</span>
     <span class="c1" style="float:left;"><b>Data:</b>......../......./.........</span>
@@ -357,7 +357,7 @@
 <p class="c2">
     <span class="c1"
           style="float:left; width: 390px;"><b>SUPERVISOR:</b> {{ getUserName($commission->supervisor) }}</span>
-    <span class="c1" style="float:left; width: 50px;">2,5%</span>
+    <span class="c1" style="float:left; width: 50px;">5%</span>
     <span class="c1"
           style="float:left; width: 120px;">R$ {{ number_format($commission->supervisor_commission, 2, ',', '.') }}</span>
     <span class="c1" style="float:left;"><b>Data:</b>......../......./.........</span>
