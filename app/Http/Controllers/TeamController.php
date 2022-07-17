@@ -29,8 +29,9 @@ class TeamController extends Controller
      */
     public function index()
     {
+
         return view('teams.index', [
-            'teams' => $this->teamRepository->getTeam(),
+            'teams' => $this->teamRepository->getTeamAll(),
         ]);
     }
 
