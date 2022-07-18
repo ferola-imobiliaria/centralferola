@@ -215,7 +215,7 @@
                                     <div class="col-md-2 col-sm-12">
                                         <label for="catcher_percentage">Porcentagem</label>
                                         <div class="input-group">
-                                            <input type="number" value="5" class="form-control" readonly>
+                                            <input type="number" value="10" class="form-control" readonly>
                                             <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fas fa-percentage"></i>
@@ -249,7 +249,7 @@
                                 <div class="col-md-2 col-sm-12">
                                     <label for="supervisor_percentage">Porcentagem</label>
                                     <div class="input-group">
-                                        <input type="text" value="2.5" class="form-control" readonly>
+                                        <input type="text" value="5" class="form-control" readonly>
                                         <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-percentage"></i>
