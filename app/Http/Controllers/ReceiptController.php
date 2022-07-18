@@ -22,6 +22,7 @@ class ReceiptController extends Controller
 
     public function show(Request $request)
     {
+
         $commission = CommissionsControl::where('uuid', $request->commission)->first();
 
         return view('receipts.index', [
@@ -29,6 +30,7 @@ class ReceiptController extends Controller
             'commission' => $commission,
             'saleSelect' => $request->commission
         ]);
+
     }
 
     public function generate(string $type, string $uuid)
