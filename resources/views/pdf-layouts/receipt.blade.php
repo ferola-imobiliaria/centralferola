@@ -54,7 +54,7 @@
             <p style="margin-top: 50px; line-height: 30px; text-align: justify;">
                 Recebi integralmente de {{ $commissionControl->owner }},
                 CPF nº {{ $commissionControl->owner_cpf }} a quantia de
-                <b>R$ {{ number_format($commissionControl->realtor_commission, 2, ',', '.') }}
+                <b>R$ {{ number_format($valorTotal, 2, ',', '.') }}
                     ({{ $valueFull }})</b>,
                 referente à comissão de venda do imóvel <b> {{ $commissionControl->property }}
                     - {{ $commissionControl->edifice }}</b>.

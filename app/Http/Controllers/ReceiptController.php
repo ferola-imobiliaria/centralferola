@@ -56,7 +56,23 @@ class ReceiptController extends Controller
                 $commissionValue = $commissionControl->real_estate_commission + $commissionControl->supervisor_commission;
                 break;
             case 'corretor':
-                $commissionValue = $commissionControl->realtor_commission;
+                $usuario = $commissionControl->user_id;
+                $exclusivo = $commissionControl->exclusive;
+                $captador = $commissionControl->catcher;
+
+                if($usuario === $exclusivo){
+                    $valor1 = $commissionControl->exclusive_commission;
+                }else {
+                    $valor1 = 0;
+                }
+
+                if($usuario === $captador) {
+                    $valor2 = $commissionControl->catcher_commission;
+                }else {
+                    $valor2 = 0;
+                }
+                $commissionValue = $commissionControl->realtor_commission + $valor1 + $valor2;
+
                 break;
             case 'supervisor':
                 $commissionValue = $commissionControl->supervisor_commission;
@@ -73,6 +89,7 @@ class ReceiptController extends Controller
 
         $pdf = PDF::loadView('pdf-layouts.receipt', [
             'type' => $type,
+            'valorTotal' => $commissionValue,
             'commissionControl' => $commissionControl,
             'valueFull' => $e->extenso($commissionValue)
         ]);
