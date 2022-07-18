@@ -67,6 +67,33 @@
                         </div>
                     </div>
                     <!-- AGRUPA OS VALORES CASO O CORRETOR SEJA O MESMO QUE O CAPTADOR OU EXCLUISO OU SUPERVIDOR -->
+                    @if($commission->user_id != $commission->catcher)
+                        <!-- RECIBO CORRETOR -->
+                        <div class="col-lg-3 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h4>CORRETOR</h4>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <i class="fas fa-user-tie mr-2"></i> {{ $commission->user->name }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-money-bill-alt mr-2"></i>
+                                            @if($commission->user_id === $commission->exclusive)
+                                                R$ {{ number_format($commission->realtor_commission +
+                                                                    $commission->exclusive_commission
+                                                                     , 2, ',', '.') }}
+                                            @endif
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="{{ route('receipt.generate', ['corretor',  $commission->uuid]) }}"
+                                   class="small-box-footer btn" target="_new">Visualizar recibo <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    @endif
                     @if($commission->user_id === $commission->catcher)
                         <!-- RECIBO CORRETOR -->
                         <div class="col-lg-3 col-sm-12">
@@ -81,11 +108,11 @@
                                         <li class="list-group-item">
                                             <i class="fas fa-money-bill-alt mr-2"></i>
                                             @if($commission->user_id === $commission->exclusive)
-                                            R$ {{ number_format($commission->realtor_commission +
+                                                R$ {{ number_format($commission->realtor_commission +
                                                                 $commission->catcher_commission +
                                                                 $commission->exclusive_commission
                                                                 , 2, ',', '.') }}
-                                                @else
+                                            @else
                                                 R$ {{ number_format($commission->realtor_commission +
                                                                 $commission->catcher_commission
                                                                , 2, ',', '.') }}
@@ -130,31 +157,32 @@
                     <!-- ./col -->
 
                     @if($commission->user_id != $commission->exclusive)
-                    <!-- RECIBO EXCLUSIVO -->
-                    <div class="col-lg-3 col-sm-12">
-                        <!-- small box -->
-                        <div class="small-box bg-purple">
-                            <div class="inner">
-                                <h4>EXCLUSIVO</h4>
-                                <ul class="list-group list-group-unbordered mb-3">
-                                    <li class="list-group-item">
-                                        @if($commission->exclusive)
-                                            <i class="fas fa-user-tie mr-2"></i> {{ getUserName($commission->exclusive) }}
-                                        @else
-                                            <i class="fas fa-ban mr-2"></i> Venda sem exclusividade
-                                        @endif
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-money-bill-alt mr-2"></i>
-                                        R$ {{ number_format($commission->exclusive_commission, 2, ',', '.') }}
-                                    </li>
-                                </ul>
+                        <!-- RECIBO EXCLUSIVO -->
+                        <div class="col-lg-3 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-purple">
+                                <div class="inner">
+                                    <h4>EXCLUSIVO</h4>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            @if($commission->exclusive)
+                                                <i class="fas fa-user-tie mr-2"></i> {{ getUserName($commission->exclusive) }}
+                                            @else
+                                                <i class="fas fa-ban mr-2"></i> Venda sem exclusividade
+                                            @endif
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-money-bill-alt mr-2"></i>
+                                            R$ {{ number_format($commission->exclusive_commission, 2, ',', '.') }}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="{{ route('receipt.generate', ['exclusivo',  $commission->uuid]) }}"
+                                   class="small-box-footer btn @if(!$commission->exclusive) disabled @endif"
+                                   target="_new">
+                                    Visualizar recibo <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                            <a href="{{ route('receipt.generate', ['exclusivo',  $commission->uuid]) }}"
-                               class="small-box-footer btn @if(!$commission->exclusive) disabled @endif" target="_new">
-                                Visualizar recibo <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
                     @endif
                     <!-- ./col -->
 
