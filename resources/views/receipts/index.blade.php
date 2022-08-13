@@ -161,7 +161,7 @@
                     </div>
                     <!-- ./col -->
 
-                    @if($commission->user_id != $commission->exclusive && $commission->exclusive != null)
+                    @if($commission->user_id === 1 && $commission->user_id != $commission->exclusive && $commission->exclusive != null)
                         <!-- RECIBO EXCLUSIVO -->
                         <div class="col-lg-3 col-sm-12">
                             <!-- small box -->
