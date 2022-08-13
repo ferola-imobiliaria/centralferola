@@ -8,6 +8,8 @@ interface UserRepositoryInterface
 {
     public function getAll();
 
+    public function getUsersNotAdmin();
+
     public function getRealtors();
 
     public function getUserTeam();

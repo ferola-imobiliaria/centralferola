@@ -30,10 +30,11 @@ class ChartSupervisorController extends Controller
 
     public function index($type)
     {
+
          $users = Auth::user();
          $team = $this->userRepository->getUserTeamById($users->id);
 
-         $teams = ($users->profile == 'admin') ? $this->userRepository->getAll() : $this->userRepository->getUsersTeamByTeam($team);;
+         $teams = ($users->profile == 'admin') ? $this->userRepository->getUsersNotAdmin() : $this->userRepository->getUsersTeamByTeam($team);;
 
         return view('charts.supervisor', [
             'team' => $teams,

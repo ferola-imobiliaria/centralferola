@@ -45,4 +45,11 @@ class UserRepository implements UserRepositoryInterface
             ->orderBy('name_short', 'asc')
             ->get('users.*', 'teams.*');
     }
+
+    public function getUsersNotAdmin()
+    {
+        return User::all()
+            ->where('profile', '!=', 'admin');
+
+    }
 }
