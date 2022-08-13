@@ -31,10 +31,10 @@ class ChartSupervisorController extends Controller
     public function index($type)
     {
 
-         $users = Auth::user();
-         $team = $this->userRepository->getUserTeamById($users->id);
+        $users = Auth::user();
+        $team = $this->userRepository->getUserTeamById($users->id);
 
-         $teams = ($users->profile == 'admin') ? $this->userRepository->getUsersNotAdmin() : $this->userRepository->getUsersTeamByTeam($team);;
+        $teams = ($users->profile == 'admin') ? $this->userRepository->getUsersNotAdmin() : $this->userRepository->getUsersTeamByTeam($team);;
 
         return view('charts.supervisor', [
             'team' => $teams,
@@ -58,7 +58,7 @@ class ChartSupervisorController extends Controller
             'realtorSelected' => $request->realtor,
             'fieldSelected' => $request->field,
             'yearSelected' => $request->year,
-            'type' => $type
+            'type' => $type,
         ]);
     }
 
@@ -97,8 +97,14 @@ class ChartSupervisorController extends Controller
         $chart = new ChartReports();
         $chart->labels(months('short'));
         $chart->dataset(trans($field), 'line', $data->values())->options([
-            'backgroundColor' => '#b81a1ab3'
+            'backgroundColor' => '#b81a1ab3',
         ]);
+
+        //separa o array para soma
+        $somaTotal = (array)$chart->datasets[0];
+
+        // soma o resultado para mostrar o TOTAL na view
+        $chart->resultado = array_sum($somaTotal['values']);
 
         return $chart;
     }

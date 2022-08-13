@@ -17,7 +17,6 @@ class ChartRealtorController extends Controller
 
     public function index()
     {
-        die('aqui');
         return view('charts.realtor', [
             'commissionChart' => $this->chart('realtor_commission', 'Comissões', 'line', '#dc3545c2'),
             'catcherChart' => $this->chart('catcher_commission', 'Captações', 'line', '#075f1cc2'),

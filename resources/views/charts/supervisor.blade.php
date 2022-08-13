@@ -22,7 +22,8 @@
 
                 <div class="row">
                     <div class="form-group col-md">
-                        <select class="form-control select2bs4" name="realtor" id="realtor" style="width: 100%;"
+                        <select class="form-control select2bs4" name="realtor" id="realtor" required
+                                style="width: 100%;"
                                 data-placeholder="Selecione o corretor">
                             <option value=""></option>
 
@@ -36,7 +37,8 @@
                     </div>
                     <div class="form-group col-md">
                         @if($type == 'producao')
-                            <select class="form-control select2bs4" name="field" id="field" style="width: 100%;"
+                            <select class="form-control select2bs4" name="field" id="field" required
+                                    style="width: 100%;"
                                     data-placeholder="Selecione o item">
                                 <option value=""></option>
                                 <option value="captured_properties"
@@ -78,7 +80,8 @@
                             </select>
                         @elseif($type == 'comissao')
 
-                            <select class="form-control select2bs4" name="field" id="field" style="width: 100%;"
+                            <select class="form-control select2bs4" name="field" id="field" required
+                                    style="width: 100%;"
                                     data-placeholder="Selecione o item">
                                 <option value=""></option>
                                 <option value="realtor_commission"
@@ -97,7 +100,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md">
-                        <select class="custom-select" name="year" id="year">
+                        <select class="custom-select" name="year" id="year" required>
                             @foreach(\App\Helpers\Date::intervalYear(now()->year, '2020') as $year)
                                 <option value="{{ $year }}"
                                     {{ ($year == ($yearSelected ?? '') ? 'selected' : '') }}>
@@ -118,13 +121,20 @@
 
     <!-- CHART -->
     @isset($chart)
+
         <div class="row">
             <div class="col-md">
                 <div class="card card-danger card-outline">
                     <div class="card-header">
                         <h4>
                             <i class="fas fa-chart-bar mr-2"></i> {{ strtoupper(__($fieldSelected)) }}
-                            - {{ $yearSelected }}
+                            - {{ $yearSelected }} -
+                            @if($type === 'producao')
+                                Total: {{$chart->resultado}}
+                            @else
+                                Total: {{number_format($chart->resultado, 2, ',','.')}}
+                            @endif
+
                         </h4>
                     </div>
                     <div class="card-body">
