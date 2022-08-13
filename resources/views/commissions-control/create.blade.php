@@ -88,6 +88,51 @@
                             </div>
 
                             <div class="form-row">
+                                <div class="col-sm-12">
+                                    <div class="bg-gray form-group" style="padding: 5px">
+                                        <div class="custom-control custom-checkbox" id="checkParceiro">
+                                            <input class="custom-control-input" type="checkbox" id="isParceiro">
+                                            <label for="isParceiro" class="custom-control-label">Venda feita com
+                                                Parceiro?</label>
+
+                                        </div>
+
+                                        <div class="form-group row" id="divParceiro" style="display: none;">
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <span class="bg-red">Preencha o valor da comissão com 50% do valor da venda da propriedade</span>
+                                            </div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <label for="parceiro">Nome do Parceiro</label>
+                                                <input type="text" class="form-control" name="nome_parceiro"
+                                                       id="nome_parceiro">
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-12">
+                                                <label for="cpf_cnpj_parceiro">CPF / CNPJ do Parceiro</label>
+                                                <input type="text" class="form-control " name="cpf_cnpj_parceiro"
+                                                       id="cpf_cnpj_parceiro">
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-12">
+                                                <label for="telefone_parceiro">Telefone do Parceiro</label>
+                                                <input type="text" class="form-control maskCellPhone"
+                                                       name="telefone_parceiro" id="telefone_parceiro">
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 justify-content-center">
+                                                <label for="sale_value_parceiro">Valor da comissão</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                              <b>R$</b>
+                                            </span>
+                                                    </div>
+                                                    <input type="text" class="form-control maskMoney2" name="sale_value_parceiro"
+                                                           id="sale_value_parceiro" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mb-3 justify-content-center">
                                 <div class="col-md-3 col-sm-12">
                                     <label for="sale_date">Data da venda</label>
                                     <input type="date" class="form-control" name="sale_date" id="sale_date"
@@ -137,6 +182,12 @@
                                 </div>
                             </div>
 
+
+                            <div class="form-row">
+
+
+                            </div>
+
                             <div class="form-row">
                                 <div class="col-md-7 col-sm-12">
                                     <label for="realtor">Corretor</label>
@@ -175,6 +226,7 @@
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="form-row mb-3">
                                 <div class="col-md-7 col-sm-12">
