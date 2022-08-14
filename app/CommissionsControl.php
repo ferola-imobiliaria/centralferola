@@ -39,7 +39,12 @@ class CommissionsControl extends Model
         "supervisor",
         "supervisor_percentage",
         "supervisor_commission",
-        "real_estate_commission"
+        "real_estate_commission",
+        "is_parceiro",
+        "nome_parceiro",
+        "cpf_cnpj_parceiro",
+        "telefone_parceiro",
+        "sale_value_parceiro"
     ];
 
     public function getRouteKeyName()
