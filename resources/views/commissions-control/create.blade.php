@@ -91,7 +91,7 @@
                                 <div class="col-sm-12">
                                     <div class="bg-gray form-group" style="padding: 5px">
                                         <div class="custom-control custom-checkbox" id="checkParceiro">
-                                            <input class="custom-control-input" type="checkbox" id="isParceiro">
+                                            <input class="custom-control-input" type="checkbox" id="isParceiro" name="isParceiro">
                                             <label for="isParceiro" class="custom-control-label">Venda feita com
                                                 Parceiro?</label>
 
