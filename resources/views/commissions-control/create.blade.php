@@ -125,7 +125,7 @@
                                             </span>
                                                     </div>
                                                     <input type="text" class="form-control maskMoney2" name="sale_value_parceiro"
-                                                           id="sale_value_parceiro" required>
+                                                           id="sale_value_parceiro">
                                                 </div>
                                             </div>
                                         </div>

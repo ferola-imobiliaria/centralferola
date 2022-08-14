@@ -59,6 +59,18 @@ class CommissionsControlController extends Controller
      */
     public function store(Request $request)
     {
+        if($request['isParceiro'] != "on")
+        {
+            $request['isParceiro'] = null;
+            $request['nome_parceiro'] = null;
+            $request['nome_parceiro'] = null;
+            $request['cpf_cnpj_parceiro'] = null;
+            $request['telefone_parceiro'] = null;
+            $request['sale_value_parceiro'] = null;
+        }else {
+            $request['isParceiro'] = "on";
+        }
+
         CommissionsControl::create($request->all());
 
         Toastr::success('Controle de Comissões salva com sucesso!');
