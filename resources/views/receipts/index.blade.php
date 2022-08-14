@@ -190,26 +190,26 @@
                         </div>
                     @endif
                     <!-- ./col -->
-
-                    @if($commission->user_id != $commission->catcher)
+                    <!-- RECIBO DO PARCEIRO -->
+                    @if($commission->is_parceiro != null)
                         <!-- RECIBO CAPTADOR -->
                         <div class="col-lg-3 col-sm-12">
                             <!-- small box -->
-                            <div class="small-box bg-navy">
+                            <div class="small-box">
                                 <div class="inner">
-                                    <h4>CAPTADOR</h4>
+                                    <h4>PARCEIRO</h4>
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
-                                            <i class="fas fa-user-tie mr-2"></i> {{ getUserName($commission->catcher) }}
+                                            <i class="fas fa-user-tie mr-2"></i> {{ $commission->nome_parceiro }}
                                         </li>
                                         <li class="list-group-item">
                                             <i class="fas fa-money-bill-alt mr-2"></i>
-                                            R$ {{ number_format($commission->catcher_commission, 2, ',', '.') }}
+                                            R$ {{ number_format($commission->sale_value, 2, ',', '.') }}
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="{{ route('receipt.generate', ['captador',  $commission->uuid]) }}"
-                                   class="small-box-footer btn" target="_new">Visualizar recibo <i
+                                <a href="{{ route('receipt.generate', ['parceiro',  $commission->uuid]) }}"
+                                   class="small-box-footer bg-gradient-gray" target="_new">Visualizar recibo <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>

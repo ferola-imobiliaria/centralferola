@@ -11,7 +11,7 @@ use phputil\extenso\Extenso;
 class ReceiptController extends Controller
 {
 
-    private $types = ['ferola', 'corretor', 'supervisor', 'exclusivo', 'captador'];
+    private $types = ['ferola', 'corretor', 'supervisor', 'exclusivo', 'captador', 'parceiro'];
 
     public function index()
     {
@@ -82,6 +82,9 @@ class ReceiptController extends Controller
                 break;
             case 'captador':
                 $commissionValue = $commissionControl->catcher_commission;
+                break;
+            case 'parceiro':
+                $commissionValue = $commissionControl->sale_value;
                 break;
             default:
                 exit();

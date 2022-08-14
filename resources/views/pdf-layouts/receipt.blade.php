@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="UTF-8">
@@ -43,6 +42,28 @@
         </div>
     @endif
 
+    @if ($type === 'parceiro')
+        <div style="padding: 30px 50px; font-size:14pt;">
+            <img src="images/logo-ferola-recibo.png" />
+            <br /><br />
+            <div style="text-align:center; background: #ccc;">
+                <h2>RECIBO</h2>
+            </div>
+            <p style="margin-top: 50px; line-height: 30px; text-align: justify;">
+                Recebi integralmente de {{ $commissionControl->owner }},
+                CPF nº {{ $commissionControl->owner_cpf }} a quantia de
+                <b>R$ {{ number_format(($commissionControl->sale_value), 2, ',', '.') }}
+                    ({{ $valueFull }})</b>,
+                referente a comissão de venda do imóvel <b> {{ $commissionControl->property }}
+                    - {{ $commissionControl->edifice }}</b>.
+            </p>
+            <p style="margin-top: 50px;">Brasília, {{ $commissionControl->sale_date }}.</p>
+            <p style="margin-top: 100px;text-align: center;">_______________________________________
+                <br />{{ mb_strtoupper($commissionControl->nome_parceiro) }}
+                <br />CPF: {{ $commissionControl->cpf_cnpj_parceiro }}
+            </p>
+        </div>
+    @endif
 
     @if ($type === 'corretor')
         <div style="padding: 30px 50px; font-size:14pt;">
