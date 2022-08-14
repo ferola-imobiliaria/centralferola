@@ -20,6 +20,8 @@ class InformativesTeamScope implements Scope
         if (Auth::user()->profile != 'admin') {
             $supervisor_id = Team::supervisorMyTeam()->id;
             $builder->where('user_id', $supervisor_id)->orderBy('updated_at', 'desc');
+        }else {
+            $builder->where('user_id', '=', 2)->orderBy('updated_at', 'desc');
         }
     }
 }

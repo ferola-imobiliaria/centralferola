@@ -3,7 +3,6 @@
 @section('page_title', 'Informativos e arquivos')
 
 @section('content')
-
     <div class="card card-danger card-outline">
         <div class="card-header">
             @can('is-admin-or-supervisor')
@@ -56,7 +55,7 @@
                             <div class="informative-footer row bg-gray-light p-1 mt-2 align-items-center">
                                 <div class="col">
                                     <small class="text-muted">
-                                        <b>Autor:</b> {{ $informative->user->name_short }} |
+                                        <b>Autor: {{$informative->name_short}}</b>  |
                                         <b>atualizado em:</b> {{ $informative->updated_at->format('d/m/Y \à\s H\hi') }}
                                     </small>
                                 </div>

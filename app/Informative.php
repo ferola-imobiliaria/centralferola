@@ -5,6 +5,7 @@ namespace App;
 use App\Scopes\InformativesTeamScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Informative extends Model
 {
@@ -20,6 +21,12 @@ class Informative extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function getAllInformativesUser()
+    {
+        return \Illuminate\Foundation\Auth\User::join('informatives', 'informatives.user_id', '=', 'users.id')
+            ->get('*');
     }
 
 }

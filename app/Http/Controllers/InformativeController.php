@@ -20,23 +20,31 @@ class InformativeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->profile === 'admin') {
-            $informatives = Informative::withoutGlobalScope(InformativesTeamScope::class)->get();
-        } else {
-            $informatives = Informative::all();
 
-            $informativesAdm = Informative::withoutGlobalScope(InformativesTeamScope::class)->get();
+//        if (Auth::user()->profile === 'admin') {
+//            $informatives = Informative::withoutGlobalScope(InformativesTeamScope::class)->get();
+//        } else {
+//            $informatives = Informative::all();
+//
+//            $informativesAdm = Informative::withoutGlobalScope(InformativesTeamScope::class)->get();
+//
+//            // Adicionando os informativos dos administradores na collection 'informative'
+//            foreach ($informativesAdm as $informative) {
+//                if ($informative->user->profile == 'admin') {
+//
+//                    $informatives->push($informative);
+//                }
+//            }
+//        }
+        $a = Informative::getAllInformativesUser();
 
-            // Adicionando os informativos dos administradores na collection 'informative'
-            foreach ($informativesAdm as $informative) {
-                if ($informative->user->profile == 'admin') {
-                    $informatives->push($informative);
-                }
-            }
-        }
+
+//        return view('informatives.index', [
+//            'informatives' => $informatives->sortByDesc('updated_at')
+//        ]);
 
         return view('informatives.index', [
-            'informatives' => $informatives->sortByDesc('updated_at')
+            'informatives' => $a
         ]);
     }
 
