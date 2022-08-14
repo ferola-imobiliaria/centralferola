@@ -308,11 +308,26 @@
 <p class="c2">
     <span class="c1" style="float: left; width: 65%;"><b>DATA DA VENDA:</b> {{ $commission->sale_date }}</span>
 </p>
-<p class="c2" style="text-align: right;">
-    <span class="c1"><b>VLR VENDA:</b> R$ {{ number_format($commission->sale_value, 2, ',', '.') }}</span>
-</p>
+@if($commission->is_parceiro != null)
+    <p class="c2" style="text-align: right;">
+        <span class="c1"><b>VLR VENDA:</b> R$ {{ number_format(($commission->sale_value * 2), 2, ',', '.') }}</span>
+    </p>
+    <div style="clear: both;"></div>
+    <p class="c2">
+        <span class="c1" style="float:left;"><b>PARCEIRO:</b> {{ $commission->nome_parceiro }} <b>Valor a receber:</b> R$ {{ number_format($commission->sale_value, 2, ',', '.') }}</span>
+    </p>
+    <p class="c2" style="text-align: right;">
+        <span class="c1"><b>Data:</b>......../......./.........</span>
+    </p>
+
+@else
+    <p class="c2" style="text-align: right;">
+        <span class="c1"><b>VLR VENDA:</b> R$ {{ number_format($commission->sale_value, 2, ',', '.') }}</span>
+    </p>
+@endif
 
 <div style="clear: both;"></div>
+
 
 <p class="c2">
     <span class="c1" style="float: left; width: 66%;"><b>COMISS&Atilde;O:</b> R$ {{ number_format($commission->commission_value, 2, ',', '.') }}</span>

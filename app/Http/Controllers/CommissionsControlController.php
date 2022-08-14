@@ -88,6 +88,10 @@ class CommissionsControlController extends Controller
     {
         $commission = CommissionsControl::where('uuid', $uuid)->first();
 
+//        echo "<pre>";
+//        print_r($commission);
+//        die;
+
         /**
          * Calcula a porcentagem de comissão da imobiliária
          */
