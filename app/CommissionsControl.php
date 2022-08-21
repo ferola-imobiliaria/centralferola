@@ -178,4 +178,9 @@ class CommissionsControl extends Model
     {
         $this->attributes['real_estate_commission'] = $this->clearMoney($value);
     }
+
+    public function setParceiroCommissionAttribute($value)
+    {
+        $this->attributes['sale_value_parceiro'] = $this->clearMoney($value);
+    }
 }

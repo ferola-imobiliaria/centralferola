@@ -59,6 +59,9 @@ class CommissionsControlController extends Controller
      */
     public function store(Request $request)
     {
+        $valorParceiro = str_replace(',', '.',
+                            str_replace('.', '', $request->sale_value_parceiro));
+
         if($request['isParceiro'] != "on")
         {
             $request['isParceiro'] = null;
@@ -68,7 +71,7 @@ class CommissionsControlController extends Controller
             $request['telefone_parceiro'] = null;
             $request['sale_value_parceiro'] = null;
         }else {
-            $request['isParceiro'] = "on";
+            $request['sale_value_parceiro'] = $valorParceiro;
         }
 
         CommissionsControl::create($request->all());
