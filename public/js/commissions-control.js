@@ -58,11 +58,4 @@ $("#sale_value").on("change", function () {
     $("#divParceiro").toggle("fadeIn", function () {
         $("input#parceiro").attr("required", "true")
     })
-
-    $("#sale_value_parceiro").on("change", function () {
-        var valor_parceiro = $("#sale_value_parceiro").val();
-        if (valor_parceiro) {
-            alert("Preencha o campo VALOR DA VENDA COM R$ " + valor_parceiro + " para que o boleto seja emitido corretamente!");
-        }
-    })
 });

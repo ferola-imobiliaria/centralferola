@@ -98,9 +98,7 @@
                                         </div>
 
                                         <div class="form-group row" id="divParceiro" style="display: none;">
-                                            <div class="form-group col-md-12 col-sm-12">
-                                                <span class="bg-red">Preencha o valor da comissão com 50% do valor da venda da propriedade</span>
-                                            </div>
+
                                             <div class="form-group col-md-12 col-sm-12">
                                                 <label for="parceiro">Nome do Parceiro</label>
                                                 <input type="text" class="form-control" name="nome_parceiro"
