@@ -55,6 +55,7 @@ $("#sale_value").on("change", function () {
         $("#telefone_parceiro").val("");
         $("#sale_value_parceiro").val("");
     }
+    //
     $("#divParceiro").toggle("fadeIn", function () {
         $("input#parceiro").attr("required", "true")
     })
