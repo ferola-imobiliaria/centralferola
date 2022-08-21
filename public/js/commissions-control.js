@@ -55,7 +55,7 @@ $("#sale_value").on("change", function () {
         $("#telefone_parceiro").val("");
         $("#sale_value_parceiro").val("");
     }
-    //parceiro aparece modal
+    //parceiro aparece modal ajuste
     $("#divParceiro").toggle("fadeIn", function () {
         $("input#parceiro").attr("required", "true")
     })
