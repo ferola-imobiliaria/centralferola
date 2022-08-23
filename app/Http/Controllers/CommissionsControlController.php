@@ -62,6 +62,10 @@ class CommissionsControlController extends Controller
         $valorParceiro = str_replace(',', '.',
                             str_replace('.', '', $request->sale_value_parceiro));
 
+        $venda = str_replace(',', '.',
+            str_replace('.', '', $request->sale_value));
+
+
         if($request['isParceiro'] != "on")
         {
             $request['isParceiro'] = null;
@@ -71,6 +75,7 @@ class CommissionsControlController extends Controller
             $request['telefone_parceiro'] = null;
             $request['sale_value_parceiro'] = null;
         }else {
+            $request['sale_value'] = ($venda + $valorParceiro);
             $request['sale_value_parceiro'] = $valorParceiro;
         }
 
