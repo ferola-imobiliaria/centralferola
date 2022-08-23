@@ -21,6 +21,9 @@ class InformativeController extends Controller
     public function index()
     {
 
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+
 //        if (Auth::user()->profile === 'admin') {
 //            $informatives = Informative::withoutGlobalScope(InformativesTeamScope::class)->get();
 //        } else {
