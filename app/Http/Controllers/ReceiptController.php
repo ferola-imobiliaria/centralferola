@@ -84,7 +84,7 @@ class ReceiptController extends Controller
                 $commissionValue = $commissionControl->catcher_commission;
                 break;
             case 'parceiro':
-                $commissionValue = $commissionControl->sale_value;
+                $commissionValue = $commissionControl->sale_value_parceiro;
                 break;
             default:
                 exit();

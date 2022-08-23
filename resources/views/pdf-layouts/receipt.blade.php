@@ -52,7 +52,7 @@
             <p style="margin-top: 50px; line-height: 30px; text-align: justify;">
                 Recebi integralmente de {{ $commissionControl->owner }},
                 CPF nº {{ $commissionControl->owner_cpf }} a quantia de
-                <b>R$ {{ number_format(($commissionControl->sale_value), 2, ',', '.') }}
+                <b>R$ {{ number_format(($commissionControl->sale_value_parceiro), 2, ',', '.') }}
                     ({{ $valueFull }})</b>,
                 referente a comissão de venda do imóvel <b> {{ $commissionControl->property }}
                     - {{ $commissionControl->edifice }}</b>.
@@ -60,7 +60,7 @@
             <p style="margin-top: 50px;">Brasília, {{ $commissionControl->sale_date }}.</p>
             <p style="margin-top: 100px;text-align: center;">_______________________________________
                 <br />{{ mb_strtoupper($commissionControl->nome_parceiro) }}
-                <br />CPF: {{ $commissionControl->cpf_cnpj_parceiro }}
+                <br />CPF/CNPJ: {{ $commissionControl->cpf_cnpj_parceiro }}
             </p>
         </div>
     @endif

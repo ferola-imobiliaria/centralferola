@@ -191,7 +191,7 @@
                     @endif
                     <!-- ./col -->
                     <!-- RECIBO DO PARCEIRO -->
-                    @if($commission->is_parceiro != null)
+                    @if($commission->nome_parceiro != '')
                         <!-- RECIBO CAPTADOR -->
                         <div class="col-lg-3 col-sm-12">
                             <!-- small box -->
@@ -204,7 +204,7 @@
                                         </li>
                                         <li class="list-group-item">
                                             <i class="fas fa-money-bill-alt mr-2"></i>
-                                            R$ {{ number_format($commission->sale_value, 2, ',', '.') }}
+                                            R$ {{ number_format($commission->sale_value_parceiro, 2, ',', '.') }}
                                         </li>
                                     </ul>
                                 </div>

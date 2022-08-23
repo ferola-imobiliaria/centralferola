@@ -106,7 +106,7 @@
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="cpf_cnpj_parceiro">CPF / CNPJ do Parceiro</label>
-                                                <input type="text" class="form-control " name="cpf_cnpj_parceiro"
+                                                <input type="text" class="form-control" minlength="11" maxlength="18" name="cpf_cnpj_parceiro"
                                                        id="cpf_cnpj_parceiro">
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
