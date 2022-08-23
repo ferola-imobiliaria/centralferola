@@ -130,7 +130,7 @@
                             <i class="fas fa-chart-bar mr-2"></i> {{ strtoupper(__($fieldSelected)) }}
                             - {{ $yearSelected }} -
                             @if($type === 'producao')
-                                Total: {{$chart->resultado}}
+                                Total: {{number_format($chart->resultado, 2, ',', '.')}}
                             @else
                                 Total: {{number_format($chart->resultado, 2, ',','.')}}
                             @endif
