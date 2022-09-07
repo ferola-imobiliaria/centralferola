@@ -23,7 +23,7 @@ class Informative extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function getAllInformativesUser()
+    public static function getAllInformativesUser()
     {
         return \Illuminate\Foundation\Auth\User::join('informatives', 'informatives.user_id', '=', 'users.id')
             ->get('*');
