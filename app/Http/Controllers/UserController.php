@@ -22,6 +22,7 @@ class UserController extends Controller
         $this->middleware('auth');
         $this->userRepository = $userRepository;
     }
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -86,6 +87,7 @@ class UserController extends Controller
         $user->cpf = $request->cpf;
         $user->creci = $request->creci;
         $user->phone = $request->phone;
+        $user->profile = $request->profile;
         if (!is_null($request->file('photo'))) {
             $user->photo = $request->file('photo')
                 ->storeAs('profiles_pictures', Str::slug($user->name) . '-' .
@@ -114,8 +116,11 @@ class UserController extends Controller
             Toastr::error("<b>{$user->name}</b> é supervisor da equipe <b>{$user->team->name}</b>. Para excluí-lo é necessário que a equipe não tenha mais nenhum corretor.",
                 null, ['timeOut' => 15000]);
         } else {
+            $user->team_id = null;
+            $user->save();
             if ($user->delete()) {
                 Toastr::success("O usuário <b>{$user->name_short}</b> foi excluído com sucesso");
+
             }
         }
 

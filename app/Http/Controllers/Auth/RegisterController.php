@@ -145,7 +145,6 @@ class RegisterController extends Controller
                 'photo' => $profile_picture
             ]);
 
-
             // Envio dos dados de cadastro por e-mail
             Arr::add($userData, 'password_email', $password);
             Mail::send(new \App\Mail\newAccount($userData));

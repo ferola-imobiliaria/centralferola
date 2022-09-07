@@ -65,22 +65,42 @@
                             </div>
 
                             {{-- Team Realtor --}}
-                            @canany('is-admin')
-                                @if($user->profile != 'admin')
-                                    <div class="form-group col-md-6 col-sm-12 mb-3">
-                                        <label for="realtor_team">Equipe</label>
-                                        <select class="custom-select" name="realtor_team" id="realtor_team">
-                                            @foreach($teams as $team)
-                                                <option
-                                                    value="{{ $team->id }}" {{ ($user->team->id == $team->id ? 'selected' : '' ) }}>
-                                                    {{ $team->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-                            @endcanany
-                            {{-- END Team Realtor --}}
+                            <div class="form-row">
+                                @canany('is-admin')
+                                    @if($user->profile != 'admin')
+                                        <div class="form-group col-md-6 col-sm-12 mb-3">
+                                            <label for="realtor_team">Equipe</label>
+                                            <select class="custom-select" name="realtor_team" id="realtor_team">
+                                                @foreach($teams as $team)
+                                                    <option
+                                                        value="{{ $team->id }}" {{ ($user->team->id == $team->id ? 'selected' : '' ) }}>
+                                                        {{ $team->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
+                                @endcanany
+                                {{-- END Team Realtor --}}
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="phone">Perfil</label>
+                                    <select class="custom-select" name="profile" id="profile">
+                                        @if($user->profile == 'realtor')
+                                            <option value="realtor" selected>Corretor</option>
+                                            <option value="supervisor">Supervisor</option>
+                                            <option value="admin">Administrador</option>
+                                        @elseif($user->profile == 'supervisor')
+                                            <option value="supervisor" selected>Supervisor</option>
+                                            <option value="realtor">Corretor</option>
+                                            <option value="admin">Administrador</option>
+                                        @elseif($user->profile == 'admin')
+                                            <option value="admin" selected>Administrador</option>
+                                            <option value="supervisor">Supervisor</option>
+                                            <option value="realtor">Corretor</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
 
 
                             <div class="form-row">
